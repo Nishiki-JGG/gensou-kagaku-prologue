@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>幻想科学のプロローグ — 設定資料館</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500&display=swap');
+:root{
+  /* 白ベース背景 */
+  --bg0:#f5f6fa; --bg1:#eceef5; --bg2:#ffffff; --bg3:#e8eaf2;
+  --navy:#2a3468; --indigo:#3a4688;
+  /* アクセント：ロゴ配色に準拠（ネイビー・パープル・シルバー） */
+  --gold:#3a4688;   /* ロゴのネイビー → アクセント主色 */
+  --blue:#5060a8;   /* 中間ブルーパープル */
+  --pale:#2a3468;   /* 濃いネイビー */
+  /* テキスト：白背景に高コントラスト */
+  --tp:#1a1e38;    /* Primary: 最暗ネイビー */
+  --ts:#2a2e4a;    /* Secondary: 濃いネイビー */
+  --tm:#4a5070;    /* Muted: 中間 */
+  --bd:#c8cce0; --bds:#d8dce8;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-serif;min-height:100vh;line-height:1.6;}
+
+/* HEADER */
+.hdr{background:#ffffff;display:flex;flex-direction:column;align-items:center;padding:32px 16px 20px;border-bottom:3px solid var(--navy);box-shadow:0 2px 12px rgba(42,52,104,0.10);}
+.hdr-logo-wrap{display:flex;align-items:center;justify-content:center;}
+.hdr img{width:420px;max-width:90vw;object-fit:contain;filter:drop-shadow(0 2px 12px rgba(42,52,104,0.13));}
+.hdr-sub{font-size:12px;color:#3a4688;letter-spacing:.25em;margin-top:10px;font-weight:700;}
+
+/* NAVBAR */
+.nb{background:#ffffff;border-bottom:2px solid var(--bd);display:flex;flex-wrap:wrap;justify-content:center;gap:4px;padding:6px 8px;position:sticky;top:0;z-index:500;box-shadow:0 2px 8px rgba(42,52,104,0.08);}
+.ni{position:relative;}
+.nb-btn{display:flex;align-items:center;gap:4px;padding:10px 15px;font-size:13px;color:var(--tm);cursor:pointer;border-radius:5px;transition:all .2s;white-space:nowrap;user-select:none;font-weight:500;}
+.nb-btn:hover,.nb-btn.open{background:var(--bg3);color:var(--tp);}
+.nb-btn.act{color:#ffffff;background:var(--navy);font-weight:700;}
+.nb-arr{font-size:10px;opacity:.7;transition:transform .2s;display:inline-block;}
+.nb-btn.open .nb-arr{transform:rotate(180deg);}
+
+.dd{display:none;position:absolute;top:calc(100% + 4px);left:0;min-width:180px;background:#ffffff;border:1px solid var(--bd);border-radius:7px;padding:6px 0;z-index:600;box-shadow:0 8px 32px rgba(42,52,104,0.15);}
+.dd.show{display:block;}
+.ddi{padding:10px 16px;font-size:13px;color:var(--ts);cursor:pointer;transition:background .15s;white-space:nowrap;}
+.ddi:hover{background:var(--bg3);color:var(--tp);}
+.ddi.dim{color:var(--tm);opacity:0.5;cursor:default;font-size:12px;}
+.dd-sep{height:1px;background:var(--bd);margin:5px 0;}
+
+/* MAIN */
+.main{max-width:860px;margin:0 auto;padding:30px 20px 60px;}
+.pg{display:none;}
+.pg.show{display:block;}
+
+/* TITLES */
+.ptitle{font-family:'Noto Serif JP',serif;font-size:22px;font-weight:700;padding-left:15px;margin-bottom:24px;border-left:5px solid;letter-spacing:0.05em;}
+.pt-gold{color:#2a3468;border-left-color:#2a3468;}
+.pt-blue{color:#3040a0;border-left-color:#3040a0;}
+.pt-green{color:#1a6030;border-left-color:#1a6030;}
+.pt-purple{color:#5a2a90;border-left-color:#5a2a90;}
+.pt-teal{color:#0a6060;border-left-color:#0a6060;}
+.pt-red{color:#a01010;border-left-color:#a01010;}
+
+/* SUB HEADING */
+.sh{font-size:15px;font-weight:700;color:var(--navy);border-left:3px solid var(--blue);padding-left:10px;margin:24px 0 12px;background:rgba(42,52,104,0.05);padding-top:4px;padding-bottom:4px;}
+
+/* CARD GRIDS */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;}
+.card{background:#ffffff;border:1px solid var(--bd);border-radius:8px;padding:14px 16px;box-shadow:0 1px 4px rgba(42,52,104,0.06);}
+.card-t{font-size:14px;font-weight:700;margin-bottom:6px;border-bottom:1px solid var(--bds);padding-bottom:4px;}
+.card-b{font-size:13px;color:var(--ts);line-height:1.7;}
+.c-bl{color:#2a3ea0;}.c-gr{color:#1a6030;}.c-am{color:#7a5000;}.c-rd{color:#9a1010;}.c-pu{color:#5a1a90;}.c-te{color:#0a6060;}.c-wh{color:var(--tp);}
+
+/* PROSE */
+.prose{font-size:14px;color:var(--ts);line-height:1.9;margin-bottom:15px;}
+
+/* TAGS */
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.tag{font-size:11px;padding:3px 9px;border-radius:4px;font-weight:700;}
+.tg{background:#d4f0dc;color:#1a5a28;border:1px solid #5aaa70;}
+.tb{background:#dce6fa;color:#1a2e80;border:1px solid #6080c8;}
+.ty{background:#fdf0d0;color:#6a4000;border:1px solid #c08830;}
+.tp{background:#ecdcfa;color:#4a1080;border:1px solid #9060c0;}
+.tr{background:#fad8d8;color:#8a0808;border:1px solid #c05050;}
+.tw{background:#e8ecf4;color:#2a3460;border:1px solid #8090b0;}
+
+/* SWITCHER PILLS */
+.sw-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.sw-btn{padding:8px 16px;font-size:13px;border-radius:25px;cursor:pointer;border:1px solid var(--bd);color:var(--tm);background:#ffffff;transition:all .2s;}
+.sw-btn:hover{border-color:var(--blue);color:var(--tp);background:var(--bg3);}
+.sw-btn.act{background:var(--navy);border-color:var(--navy);color:#ffffff;font-weight:700;}
+
+/* TABS */
+.tabs{display:flex;border-bottom:2px solid var(--bd);margin-bottom:18px;}
+.tab{padding:10px 18px;font-size:13px;color:var(--tm);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;}
+.tab:hover{color:var(--tp);background:var(--bg3);}
+.tab.act{color:var(--navy);border-bottom-color:var(--navy);background:rgba(42,52,104,0.07);}
+
+/* CHARA */
+.cmain{display:flex;gap:24px;margin-bottom:20px;flex-wrap:wrap;}
+.cimg{width:220px;min-width:220px;border-radius:10px;overflow:hidden;border:2px solid var(--bd);box-shadow:0 2px 12px rgba(42,52,104,0.10);}
+.cimg img{width:100%;display:block;}
+.cinfo{flex:1;min-width:260px;}
+.cname{font-family:'Noto Serif JP',serif;font-size:22px;color:var(--navy);margin-bottom:4px;font-weight:700;}
+.cfn{font-size:12px;color:var(--tm);margin-bottom:12px;}
+.cstat{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:15px;}
+.sr{display:flex;justify-content:space-between;padding:7px 10px;background:var(--bg3);border-radius:5px;font-size:13px;border:1px solid var(--bds);}
+.sk{color:var(--tm);}.sv{color:var(--tp);font-weight:700;}
+.cdesc{font-size:14px;color:var(--ts);line-height:1.9;}
+
+/* NPC CARDS */
+.npc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:15px;margin-bottom:20px;}
+.npc-card{background:#ffffff;border:1px solid var(--bd);border-radius:10px;padding:16px 18px;box-shadow:0 1px 4px rgba(42,52,104,0.07);}
+.npc-name{font-size:16px;font-weight:700;color:var(--tp);margin-bottom:4px;}
+.npc-sub{font-size:12px;color:var(--blue);margin-bottom:10px;font-family:monospace;}
+.npc-body{font-size:13px;color:var(--ts);line-height:1.8;}
+
+/* RANK TABLE */
+.rtbl{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:15px;}
+.rtbl th{background:var(--navy);color:#ffffff;padding:12px 10px;text-align:left;border-bottom:2px solid var(--blue);font-weight:700;}
+.rtbl td{padding:10px 10px;border-bottom:1px solid var(--bd);color:var(--ts);vertical-align:top;}
+.rtbl td:first-child{color:var(--navy);font-weight:700;white-space:nowrap;}
+
+/* GALLERY */
+.gnav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
+.gbtn{padding:8px 14px;font-size:12px;border-radius:6px;cursor:pointer;border:1px solid var(--bd);color:var(--tm);background:#ffffff;transition:all .15s;}
+.gbtn:hover{background:var(--bg3);}
+.gbtn.act{background:var(--navy);color:#ffffff;border-color:var(--navy);}
+.gp-pnl{display:none;}
+.gp-pnl.show{display:block;}
+.gal-img{width:100%;max-width:520px;border-radius:10px;overflow:hidden;border:2px solid var(--bd);box-shadow:0 2px 12px rgba(42,52,104,0.10);}
+.gal-img img{width:100%;display:block;}
+.gal-cap{font-size:13px;color:var(--tm);margin-top:10px;}
+
+/* TERMS */
+.ti{background:#ffffff;border:1px solid var(--bd);border-radius:8px;padding:14px 16px;margin-bottom:12px;box-shadow:0 1px 4px rgba(42,52,104,0.05);}
+.tn{font-size:15px;font-weight:700;color:var(--tp);margin-bottom:6px;}
+.td{font-size:13px;color:var(--ts);line-height:1.8;}
+.ttag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:700;margin-left:10px;vertical-align:middle;}
+
+/* UPDATES */
+.ul2{display:flex;flex-direction:column;gap:10px;}
+.urow{display:flex;gap:15px;align-items:baseline;padding:10px;border-bottom:1px solid var(--bds);}
+.udate{font-size:12px;color:var(--blue);min-width:85px;font-weight:700;font-family:monospace;}
+.utxt{font-size:14px;color:var(--ts);}
+.ubadge{font-size:10px;padding:2px 6px;border-radius:4px;margin-left:8px;font-weight:700;}
+.u-new{background:#d4f0dc;color:#1a5a28;border:1px solid #5aaa70;}
+.u-add{background:#dce6fa;color:#1a2e80;border:1px solid #6080c8;}
+
+/* LINKS */
+.litem{display:flex;align-items:center;justify-content:space-between;background:#ffffff;border:1px solid var(--bd);border-radius:8px;padding:14px 18px;margin-bottom:10px;}
+.ln{font-size:15px;color:var(--tp);font-weight:700;}
+.lnote{font-size:12px;color:var(--tm);}
+
+/* WORLD NAV */
+.wnav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.wbtn{padding:8px 16px;font-size:12px;border-radius:6px;cursor:pointer;border:1px solid var(--bd);color:var(--tm);background:#ffffff;transition:all .15s;}
+.wbtn:hover{background:var(--bg3);}
+.wbtn.act{background:var(--navy);color:#ffffff;border-color:var(--navy);}
+.wpnl{display:none;}
+.wpnl.show{display:block;}
+
+/* TOP AREA */
+.hero{background:linear-gradient(135deg, #eceef5, #e0e4f0);border:2px solid var(--bd);border-radius:12px;padding:30px 25px;margin-bottom:24px;text-align:center;}
+.hero p{font-size:15px;color:var(--tp);line-height:2.2;font-weight:500;}
+.top-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;}
+.tcard{background:#ffffff;border:1px solid var(--bd);border-radius:10px;padding:20px 10px;text-align:center;cursor:pointer;transition:all .2s;box-shadow:0 1px 4px rgba(42,52,104,0.07);}
+.tcard:hover{border-color:var(--blue);background:var(--bg3);transform:translateY(-3px);box-shadow:0 4px 12px rgba(42,52,104,0.15);}
+.tcard-num{font-size:26px;font-weight:700;margin-bottom:6px;}
+.tcard-lbl{font-size:12px;color:var(--tm);font-weight:700;}
+
+/* MONEY TABLE */
+.money-row{display:flex;justify-content:space-between;padding:8px 12px;background:#ffffff;border-radius:6px;font-size:13px;margin-bottom:5px;border:1px solid var(--bds);}
+.money-k{color:var(--navy);font-weight:700;}
+.money-v{color:var(--tp);}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-logo-wrap">
+    <img src="title_logo.png" alt="幻想科学のプロローグ">
+  </div>
+  <div class="hdr-sub">— 設定資料館 —</div>
+</div>
+
+<nav class="nb" id="navbar">
+  <div class="ni"><div class="nb-btn act" onclick="gp('top');ca();">トップ</div></div>
+  <div class="ni"><div class="nb-btn" onclick="gp('intro');ca();">はじめに</div></div>
+  <div class="ni">
+    <div class="nb-btn" id="nb-chara" onclick="tdd('dd-chara',this)">キャラクター <span class="nb-arr">▼</span></div>
+    <div class="dd" id="dd-chara">
+      <div class="ddi" onclick="gc('akira');ca();">アキラ</div>
+      <div class="ddi" onclick="gc('ema');ca();">エマ</div>
+      <div class="ddi" onclick="gc('al');ca();">アル</div>
+      <div class="dd-sep"></div>
+      <div class="ddi" onclick="gc('party');ca();">序盤パーティ</div>
+      <div class="ddi" onclick="gc('guild_party');ca();">導きの輪環</div>
+      <div class="ddi" onclick="gc('npc');ca();">その他NPC</div>
+    </div>
+  </div>
+  <div class="ni">
+    <div class="nb-btn" id="nb-world" onclick="tdd('dd-world',this)">世界設定 <span class="nb-arr">▼</span></div>
+    <div class="dd" id="dd-world">
+      <div class="ddi" onclick="gw('map');ca();">大陸と国家</div>
+      <div class="ddi" onclick="gw('magic');ca();">魔法と魔素</div>
+      <div class="ddi" onclick="gw('race');ca();">種族</div>
+      <div class="ddi" onclick="gw('dungeon');ca();">龍脈とダンジョン</div>
+      <div class="ddi" onclick="gw('currency');ca();">貨幣・暦</div>
+    </div>
+  </div>
+  <div class="ni">
+    <div class="nb-btn" id="nb-org" onclick="tdd('dd-org',this)">組織・制度 <span class="nb-arr">▼</span></div>
+    <div class="dd" id="dd-org">
+      <div class="ddi" onclick="go2('adv');ca();">冒険者ギルド</div>
+      <div class="ddi" onclick="go2('com');ca();">商業ギルド</div>
+    </div>
+  </div>
+  <div class="ni">
+    <div class="nb-btn" id="nb-gallery" onclick="tdd('dd-gallery',this)">ギャラリー <span class="nb-arr">▼</span></div>
+    <div class="dd" id="dd-gallery">
+      <div class="ddi" onclick="gg('logo');ca();">ロゴ</div>
+      <div class="ddi" onclick="gg('akira_g');ca();">アキラ設定画</div>
+      <div class="ddi" onclick="gg('ema_g');ca();">エマ設定画</div>
+      <div class="dd-sep"></div>
+      <div class="ddi dim">装備・魔法（準備中）</div>
+      <div class="ddi dim">地図（準備中）</div>
+    </div>
+  </div>
+  <div class="ni"><div class="nb-btn" onclick="gp('terms');ca();">用語集</div></div>
+  <div class="ni"><div class="nb-btn" onclick="gp('links');ca();">作品リンク</div></div>
+  <div class="ni"><div class="nb-btn" onclick="gp('updates');ca();">更新履歴</div></div>
+</nav>
+
+<div class="main">
+
+<div class="pg show" id="pg-top">
+  <div class="hero"><p>魔法と科学が交差する世界——。<br>未来技術を持つ異世界人が、幻想の大陸に降り立つ。<br>「幻想科学のプロローグ」公式世界観資料館へようこそ。</p></div>
+  <div class="top-grid">
+    <div class="tcard" onclick="gc('akira')"><div class="tcard-num" style="color:var(--navy);">7+</div><div class="tcard-lbl">キャラクター</div></div>
+    <div class="tcard" onclick="gw('map')"><div class="tcard-num" style="color:#3040a0;">4</div><div class="tcard-lbl">大陸・国家</div></div>
+    <div class="tcard" onclick="go2('adv')"><div class="tcard-num" style="color:#1a6030;">2</div><div class="tcard-lbl">ギルド</div></div>
+    <div class="tcard" onclick="gw('race')"><div class="tcard-num" style="color:#5a1a90;">13+</div><div class="tcard-lbl">種族</div></div>
+    <div class="tcard" onclick="gp('terms')"><div class="tcard-num" style="color:#7a5000;">10+</div><div class="tcard-lbl">用語</div></div>
+    <div class="tcard" onclick="gg('logo')"><div class="tcard-num" style="color:#0a6060;">3</div><div class="tcard-lbl">ギャラリー</div></div>
+  </div>
+</div>
+
+<div class="pg" id="pg-intro">
+  <div class="ptitle pt-blue">はじめに</div>
+  <div style="background:#ffffff;border:1px solid var(--bd);border-radius:8px;padding:25px;max-width:600px;margin-bottom:16px;box-shadow:0 1px 6px rgba(42,52,104,0.07);">
+    <div class="prose" style="font-size:15px;color:var(--tp);line-height:2.0;">宇宙暦872年。シュトライゼル共和国軍少佐ジェイク＝ラッシュバックは、時空コントロールシステムの異常により惑星ノアごと多元的な別次元宇宙へと転移する。<br><br>彼が目覚めたのは、魔素と呼ばれる謎のエネルギーが満ちる異世界——。そこには魔法があり、エルフがいて、ダンジョンがあった。<br><br>精神汚染による人格再構成を経て、彼は「アキラ＝ジェイ＝ラッシュバック」として生きることになる。</div>
+    <div class="sh" style="margin-top:15px;margin-bottom:10px;">本サイトについて</div>
+    <div class="prose">小説「幻想科学のプロローグ」の設定資料館です。上部メニューからキャラクター・世界設定・ギルド制度・用語集などをご覧いただけます。</div>
+  </div>
+</div>
+
+<div class="pg" id="pg-chara">
+  <div class="ptitle pt-gold">キャラクター</div>
+  <div class="sw-row">
+    <div class="sw-btn act" id="csw-akira" onclick="sc('akira',this)">アキラ</div>
+    <div class="sw-btn" id="csw-ema" onclick="sc('ema',this)">エマ</div>
+    <div class="sw-btn" id="csw-al" onclick="sc('al',this)">アル</div>
+    <div class="sw-btn" id="csw-party" onclick="sc('party',this)">序盤パーティ</div>
+    <div class="sw-btn" id="csw-guild_party" onclick="sc('guild_party',this)">導きの輪環</div>
+    <div class="sw-btn" id="csw-npc" onclick="sc('npc',this)">その他NPC</div>
+  </div>
+
+  <div id="cv-akira">
+    <div class="tabs" id="akt">
+      <div class="tab act" onclick="ctab('akt','akp',0)">プロフィール</div>
+      <div class="tab" onclick="ctab('akt','akp',1)">詳細設定</div>
+      <div class="tab" onclick="ctab('akt','akp',2)">戦闘</div>
+    </div>
+    <div id="akp">
+      <div>
+        <div class="cmain">
+          <div class="cimg"><img src="アキラ.png" alt="アキラ"></div>
+          <div class="cinfo">
+            <div class="cname">アキラ＝ジェイ＝ラッシュバック</div>
+            <div class="cfn">本名：ジェイク＝ラッシュバック</div>
+            <div class="tags"><span class="tag ty">主人公</span><span class="tag tb">元軍人・少佐</span><span class="tag tb">AI搭載</span><span class="tag tp">自称科学者</span></div>
+            <div class="cstat">
+              <div class="sr"><span class="sk">年齢</span><span class="sv">26歳</span></div>
+              <div class="sr"><span class="sk">身長</span><span class="sv">182cm / 76kg</span></div>
+              <div class="sr"><span class="sk">瞳</span><span class="sv">青灰（AI時：発光）</span></div>
+              <div class="sr"><span class="sk">武器</span><span class="sv">片手剣</span></div>
+              <div class="sr"><span class="sk">出身</span><span class="sv">シュトライゼル共和国</span></div>
+              <div class="sr"><span class="sk">階級</span><span class="sv">少佐</span></div>
+            </div>
+            <div class="cdesc">「頭はSF、心はファンタジー」。超未来技術で最適化された美しい肉体とAIに支えられた異質な戦闘力を持ちながら、本人は「ちゃんと生きて、ちゃんと暮らしたい」という感覚を捨てていない。</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:none">
+        <div class="sh">人格構造（アキラ7割・ジェイク3割）</div>
+        <div class="prose">表層（驚き・喜び・ツッコミ・生活感覚）はアキラ寄り。危機対応・技術判断・一線を越えた時の冷たさはジェイクの残滓が前へ出る。完全な二重人格ではなく、深層に沈んだ判断基準として共存している。</div>
+        <div class="sh">搭載AI「アル」（第三十三話で命名）</div>
+        <div class="prose">脳・身体・ナノマシン・装備・情報処理を支える第二の脳。記憶修復、言語補正、戦闘補助、ラボ・ファクトリー構築まで担当。常に冷静・正確・簡潔。アキラが感情を、AIが構造を支える関係。発話は「　」。対外的には特殊な精霊「アル」として偽装可能。</div>
+        <div class="sh">価値観</div>
+        <div class="prose">助けてもらった恩は返す／快適第一／興味を持ったらとことん調べる／身内と弱者を守る／弱者への暴力は許さない／自由に生きたい／他人にやさしくありたい</div>
+      </div>
+      <div style="display:none">
+        <div class="sh">戦闘スタイル</div>
+        <div class="prose">AI補助込みで極めて合理的. あらゆる格闘・戦闘データがインプット済みで達人を超える水準. 普段は抑制しており、本気を出した瞬間に「こいつだけ世界が違う」と分かる.</div>
+        <div class="sh">特殊能力</div>
+        <div class="prose">ナノマシンによるDNAレベルの自己修復・常時最良状態維持. AI制御が上がると瞳が淡い青に発光（Half-Eye Ignition Mode）. 両利き完全対応（AI補助）.</div>
+        <div class="sh">武装</div>
+        <div class="prose">片手剣（メイン）、パルスピストル、ナイフ. 徐々に魔改造武器・未来武器へ移行.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="cv-ema" style="display:none">
+    <div class="tabs" id="emt">
+      <div class="tab act" onclick="ctab('emt','emp',0)">プロフィール</div>
+      <div class="tab" onclick="ctab('emt','emp',1)">詳細設定</div>
+      <div class="tab" onclick="ctab('emt','emp',2)">⚠ 裏設定</div>
+    </div>
+    <div id="emp">
+      <div>
+        <div class="cmain">
+          <div class="cimg"><img src="エマ.png" alt="エマ"></div>
+          <div class="cinfo">
+            <div class="cname">エマ＝ロベール</div>
+            <div class="cfn">本名：エメリア＝リーン＝ザウ＝フェルグレイス</div>
+            <div class="tags"><span class="tag tg">エルフ</span><span class="tag tp">魔法使い</span><span class="tag tb">公爵家三女</span><span class="tag ty">皇統接続者</span></div>
+            <div class="cstat">
+              <div class="sr"><span class="sk">年齢</span><span class="sv">48歳（エルフの若者）</span></div>
+              <div class="sr"><span class="sk">身長</span><span class="sv">162cm / 48kg</span></div>
+              <div class="sr"><span class="sk">瞳</span><span class="sv">翡翠色（高出力時：金光）</span></div>
+              <div class="sr"><span class="sk">武器</span><span class="sv">魔法杖（ロッド）</span></div>
+              <div class="sr"><span class="sk">出身</span><span class="sv">ルザリス帝国</span></div>
+              <div class="sr"><span class="sk">父</span><span class="sv">帝国宰相セルディオ</span></div>
+            </div>
+            <div class="cdesc">皇室の血を引く公爵家の娘でありながら、肩書きも美貌も恐れの象徴である金の瞳さえもフードの下に隠し、自分の力で一人前になろうともがく意地っ張りで気高い未完成の若きエルフ。</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:none">
+        <div class="sh">勅光の瞳（ちょっこうのひとみ）</div>
+        <div class="prose">強い魔力を解放した時のみ翡翠色の瞳の奥に金の光が滲む. 帝国では命令と支配の象徴. 一般人には不吉、宮廷関係者には政治的重みの可視化として受け取られる. エマ本人はこれを見られることを深く嫌っている.</div>
+        <div class="sh">ザウ称号と命名規則</div>
+        <div class="prose">ルザリス帝国の皇統接続者が名前に持つ称号.「名＝序列称号＝ザウ＝家名」の構造. 女性は「リーン」、男性は「ラース」、現皇帝のみ「ファラコル」を持つ.</div>
+        <div class="sh">家を出た理由</div>
+        <div class="prose">美貌や血筋ばかり見られ自分自身を評価されないことへの反発. 妾腹の娘として家内での立場も微妙で、常に「守られるべき娘」として扱われた. 自分の力で生きるため冒険者として家を出た.</div>
+      </div>
+      <div style="display:none">
+        <div class="sh" style="color:#9a1010;border-left-color:#9a1010;">ネタバレ注意</div>
+        <div class="prose" style="color:#8a0808;">エマの仲間だった人物の一人は父・セルディオの密命を受けた監視役だった. エマはそれを知らない. 監視役は任務を超えて本心からエマを守る側へ回り今回死亡している. 定期報告が途絶えたことでセルディオは異常を察知し、今後ペドラメやルザリス側への水面下の接触が始まる.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="cv-al" style="display:none">
+    <div class="npc-card" style="max-width:520px;">
+      <div class="npc-name">アル（ジェイク搭載AI）</div>
+      <div class="npc-sub">第三十三話でアキラが命名. 対外的偽装名：精霊アル</div>
+      <div class="tags" style="margin-top:10px;"><span class="tag tb">AI</span><span class="tag tw">第二の脳</span><span class="tag tg">中核補助存在</span></div>
+      <div class="npc-body" style="margin-top:10px; font-size:14px;">アキラの脳・身体・ナノマシン・装備・情報処理を支える中核AI. 記憶修復、言語補正、戦闘補助、研究再開、ラボ・ファクトリー構築、魔法・遺跡解析まで役割は広い.<br><br>発話は『　』. 常に冷静・正確・簡潔. 道具以上・人格未満. 無機質だが面倒見はよく、保護者めいた動きをする. 冗談は言わないが返答がシュールになることがある.<br><br>対外的にはナノマシン投影によって小型の光の精霊のような外見を演出できる（エマには共有済み）.</div>
+    </div>
+  </div>
+
+  <div id="cv-party" style="display:none">
+    <div class="sh">序盤パーティメンバー</div>
+    <div class="npc-grid">
+      <div class="npc-card">
+        <div class="npc-name">アルヴァイン</div>
+        <div class="npc-sub">ヒューム / 後衛・説明役</div>
+        <div class="npc-body">金髪長身（192cm/75kg）. 軽口と女慣れた雰囲気. 場回し・説明役として優秀. 潤滑油的存在で、ラムール絡みでは危険を経験した警戒心も持つ. アキラの隠し事に早い段階で気づく役.</div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-name">エルザ</div>
+        <div class="npc-sub">ヒューム / 後衛魔法・知性役</div>
+        <div class="npc-body">赤髪（172cm/56kg）. 冷静で理知的なツッコミ・常識人枠. パンドラクリスタル適合者. 古代文字解析・石碑転移に関わる重要人物. アキラの異質さに最も強く違和感を覚える観測者役.</div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-name">フィオナ</div>
+        <div class="npc-sub">エルフ×ビースト ハーフ / 前衛遊撃</div>
+        <div class="npc-body">猫耳持ちのハーフブラッド（171cm/61kg）. 底抜けに明るく距離が近い. 聴覚・索敵に優れた前衛. 珍しい存在として見られてきた経験を前向きさで乗り越えている.</div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-name">ランスロット</div>
+        <div class="npc-sub">ヒューム / 前衛・大剣</div>
+        <div class="npc-body">黒髪・濃紺の目（180cm/71kg）. 寡黙で喋るのが好きではないタイプ. 大剣使い. 感じすぎるからこそ言葉にしない. 詩的な言葉を漏らすことがある. 行動で示す職人的前衛.</div>
+      </div>
+    </div>
+    <div class="sh" style="margin-top:20px;">師・上位者</div>
+    <div class="npc-grid">
+      <div class="npc-card">
+        <div class="npc-name">ルーク＝ファラコル＝ザウ＝ルザリス</div>
+        <div class="npc-sub">ルザリス帝国 第五代皇帝</div>
+        <div class="npc-body">龍の力を持つエルフ末裔. 白龍へ龍化可能な圧倒的存在. 見た目や肩書きに反して気さくで芝居っ気がある. イアン・レイナードの古い友人. 序盤における「話の通じる上位権力者」.</div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-name">黒騎士イアン＝ギュネイス</div>
+        <div class="npc-sub">Sランク冒険者 / ルークの古い友人</div>
+        <div class="npc-body">全身黒甲冑（187cm/86kg）. 世界でも数人しかいないS級トランスレイス. ランスたちの護衛役でもあり、若者たちの成長を見守る歴戦の保護者枠. 強さの天井を示す物差し.</div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-name">レイナード</div>
+        <div class="npc-sub">ランスたち四人の師 / 失踪中</div>
+        <div class="npc-body">ルーク・イアンの友人. 失踪前に手紙を残し四人の救助と遺跡探索を託している. 世界で唯一、時空操作のパンドラクリスタル適合者. 不在自体が物語の推進力になる存在.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="cv-guild_party" style="display:none">
+    <div class="sh">Aランクパーティ「導きの輪環」</div>
+    <div class="prose">この大陸でも上位に入るAランクパーティ. 名前だけで場の空気が変わる「上の世界」の象徴. エメルネスト廃坑の異常湧き対応で招集される.</div>
+    <div class="npc-grid">
+      <div class="npc-card">
+        <div class="npc-name">リブ＝マクスウェル</div>
+        <div class="npc-sub">ヒューム / Aランク / 38才 / リーダー</div>
+        <div class="npc-body">表向きは斥候. 実際はアサシン. 一人称「俺」. 軽く見せるが内実は鋭いリーダー. 緊張を散らしつつ状況を細かく見ている.<br><span style="color:var(--navy);font-size:12px;font-style:italic;">「おいおい、しけた面してやがんな. もっと楽しくやろうぜ」</span></div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-name">マルス＝アルトライア</div>
+        <div class="npc-sub">ヒューム / Bランク / 32才 / 前衛</div>
+        <div class="npc-body">ジョブはソードマスター. パーティの新参者. 一人称「僕」. 柔らかく穏やかだが剣士としての芯は強い. パーティの柔軟剤的存在.<br><span style="color:var(--navy);font-size:12px;font-style:italic;">「ごめんね、みんな賑やかで」</span></div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-name">ゾゾル</div>
+        <div class="npc-sub">ドワーフ / Aランク / 65才 / 重騎士</div>
+        <div class="npc-body">盾職. 一人称「ワシ」. 豪放で装備と守りへの誇りが非常に強い. 素材や金属の価値にも敏感.<br><span style="color:var(--navy);font-size:12px;font-style:italic;">「小僧、これはヒヒイロカネじゃぞ！」</span></div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-name">ララレア＝リトリ</div>
+        <div class="npc-sub">小人族 / Bランク / 24才 / ヒーラー</div>
+        <div class="npc-body">身長108cm. 気さくで独特なしゃべり方. 一人称「ウチ」. 明るく砕けているが回復役としての責任感はある.<br><span style="color:var(--navy);font-size:12px;font-style:italic;">「こー見えて、ウチ、大人の女なんさ！」</span></div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-name">リア＝マクスウェル</div>
+        <div class="npc-sub">ヒューム / Bランク / 30才 / ソーサラー</div>
+        <div class="npc-body">リブの妹. 一人称「私」. 冷静で理性的. 兄の軽さに振り回されつつパーティの理性側を支える. まず人を観察してから判断するタイプ.<br><span style="color:var(--navy);font-size:12px;font-style:italic;">「あ、兄がいつもすみません…」</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="cv-npc" style="display:none">
+    <div class="sh">ヴェルクハーフェン編の人物</div>
+    <div class="npc-grid">
+      <div class="npc-card">
+        <div class="npc-name">ロドリゲス＝ドリス</div>
+        <div class="npc-sub">ワーウルフ / 70才 / ギルドマスター</div>
+        <div class="npc-body">身長195cm. 叩き上げの現場責任者. 実務優先で場を締める. 一方で妻への贈り物にアキラへ個別依頼を持ちかけるなど人間味もある. 面倒のない上司タイプ.</div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-name">ミーア</div>
+        <div class="npc-sub">ヒューム / ギルド受付嬢</div>
+        <div class="npc-body">アキラとエマの実績を把握し依頼の振り方に変化が出ている. 街への馴染みを示す重要な窓口役. だんだん遠慮がなくなってきた受付嬢.</div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-name">トトマ</div>
+        <div class="npc-sub">ビースト / 32才 / 北門門番</div>
+        <div class="npc-body">身長202cm. エマを「エマちゃん」と呼ぶ程の馴染み. 帰還シーンに生活感を出す存在. 街のローカルな人間関係を体現する.</div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-name">ダジー</div>
+        <div class="npc-sub">ヒューム / 48才 / 市場の八百屋</div>
+        <div class="npc-body">季節の野菜を気安く勧め、エマにおまけをつける軽口役. 市場に馴染んできた二人を象徴する存在. 日常の生活感を出す.</div>
+      </div>
+    </div>
+    <div class="sh" style="margin-top:20px;">今後登場予定</div>
+    <div class="npc-grid">
+      <div class="npc-card">
+        <div class="npc-name">ドグラン</div>
+        <div class="npc-sub">ドワーフ / 82才 / 鍛冶職人</div>
+        <div class="npc-body">工房『アズベルトの槌』. かつての伝説の鍛冶師. 未知の金属・技術にテンションが爆上がりする職人気質. 一人称「ワシ」. 後のアキラ側専属鍛冶師候補.</div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-name">リファニー＝キーン</div>
+        <div class="npc-sub">小人族 / 25才前後 / 錬金術師</div>
+        <div class="npc-body">セージグリーンの髪. ヴェルクハーフェン錬金術師ギルド所属. 専門は抽出・蒸留・乳化・保存処理. 研究バカ. アキラの美容・衛生商品を「新しい錬金術分野」と捉える. 笑い方「ぐふふ…」.</div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-name">セレナ＝プシュケー</div>
+        <div class="npc-sub">ヒューム / 27才 / 商人</div>
+        <div class="npc-body">三大大陸に名を馳せるプシュケー商会の四女. 素性を隠し各地で武者修行中. アキラの未知商品群に興味を持ち、独立商会でアキラ商品を独占したい野望を持つ.</div>
+      </div>
+      <div class="npc-card">
+        <div class="npc-name">リゼット＝ヴァルシュ</div>
+        <div class="npc-sub">ヒューム / 24才 / 商会令嬢</div>
+        <div class="npc-body">オーブリン連邦政争接続編で登場予定. 距離が近くアキラへ積極的に接近するタイプ. 政争編の案内役・商業上層との接続役. エマの感情を揺らす存在.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pg" id="pg-world">
+  <div class="ptitle pt-blue">世界設定</div>
+  <div class="wnav">
+    <div class="wbtn act" id="wn-map" onclick="sw('map',this)">大陸と国家</div>
+    <div class="wbtn" id="wn-magic" onclick="sw('magic',this)">魔法と魔素</div>
+    <div class="wbtn" id="wn-race" onclick="sw('race',this)">種族</div>
+    <div class="wbtn" id="wn-dungeon" onclick="sw('dungeon',this)">龍脈とダンジョン</div>
+    <div class="wbtn" id="wn-currency" onclick="sw('currency',this)">貨幣・暦</div>
+  </div>
+
+  <div class="wpnl show" id="wp-map">
+    <div class="sh">世界の4大陸</div>
+    <div class="grid2">
+      <div class="card"><div class="card-t c-bl">デア＝グラント</div><div class="card-b">北半球中央. 東西に長い政治・人口の中心大陸. 中央山脈（グランヴェイル大山脈）が東西を分断. ラムール王国（東）とオーブリン連邦（西）が覇権争い.</div></div>
+      <div class="card"><div class="card-t c-am">ツェントルム</div><div class="card-b">西方の南北大陸. 地表は荒野・砂漠だが地下に巨大文明圏. 龍脈が地下空洞を拡張し各地で地下都市を形成. ドワーフ国家が中核.</div></div>
+      <div class="card"><div class="card-t c-gr">ルフォレスフューテ</div><div class="card-b">南東の森と山岳大陸. 3/5が大森林、2/5が険しい山岳. エルフのルザリス帝国とビーストのティエン王国が存在. 物語の主舞台.</div></div>
+      <div class="card"><div class="card-t c-rd">魔大陸</div><div class="card-b">南半球の荒廃大陸. 龍脈が地表に剥き出し. 世界最大のダンジョン密集地. ガルス残滓の本拠地候補. 安定した国家は現時点で存在しない.</div></div>
+    </div>
+    <div class="sh" style="margin-top:20px;">主要国家</div>
+    <div class="grid3">
+      <div class="card"><div class="card-t c-rd">ラムール王国</div><div class="card-b">ヒューム至上主義・奴隷制・精神汚染された王. 冒険者ギルドが撤退済み. デア＝グラント最大の火薬庫.</div></div>
+      <div class="card"><div class="card-t c-bl">オーブリン連邦</div><div class="card-b">多民族連合. 商人・冒険者・ギルドの発言力が強い自由側. 冒険者ギルド本部はここに置く.</div></div>
+      <div class="card"><div class="card-t c-gr">ルザリス帝国</div><div class="card-b">エルフの森林帝国. 皇統接続者制度・古代遺跡・魔法文明. 首都レグリス. エマの出身地.</div></div>
+      <div class="card"><div class="card-t c-pu">ティエン王国</div><div class="card-b">ビーストの山岳王国. 身体能力と戦士文化. エルフと長い敵対史. 国王は百獣王レレベルガンザ（Sランク）.</div></div>
+      <div class="card"><div class="card-t c-am">エイゼンハイム王国</div><div class="card-b">ドワーフの地下国家. オアシス・ダンジョン中心. 鍛冶・鉱山・地下建築の職人国家. 国王はSランク冒険者ゴンドワナ.</div></div>
+      <div class="card"><div class="card-t c-te">リブル共和国</div><div class="card-b">港湾小国家. 港町ペドラメ. 多種族混成・次大陸への玄関口. 商業ギルド本部がここに置かれる.</div></div>
+      <div class="card"><div class="card-t c-wh">ヴュステンルーエ</div><div class="card-b">ツェントルム北部の砂漠交易町. 法が弱く実力と金がものを言う. 諜報・裏社会・追跡劇の舞台.</div></div>
+      <div class="card"><div class="card-t c-am">サルセン王国</div><div class="card-b">小人族の王国. ツェントルム南部. 器用さと持久力が武器. 外交においてしたたか.</div></div>
+    </div>
+  </div>
+
+  <div class="wpnl" id="wp-magic">
+    <div class="sh">魔素（マソ）とは</div>
+    <div class="prose">この別次元宇宙に遍在する高次位相性を持つ基底粒子／場の励起. 粒子・場・情報媒体・次元間干渉媒体の四つの性質を同時に持つ. 地下では「龍脈」として巨大な流れを形成し、地表の気候・植生・魔物の発生に大きな影響を与える.</div>
+    <div class="sh">魔素の基本特性（作者用設定）</div>
+    <div class="grid2">
+      <div class="card"><div class="card-t" style="color:var(--navy);">電子置換性</div><div class="card-b">一定条件下で電子に置き換わるように振る舞う. 化学結合・発光・発熱・金属性質に関与する.</div></div>
+      <div class="card"><div class="card-t" style="color:var(--navy);">ニュートリノ置換性</div><div class="card-b">深部浸透・生体内部への干渉・神経・遺伝子発現への影響が可能. 長期的な生体変質を引き起こす.</div></div>
+      <div class="card"><div class="card-t" style="color:var(--navy);">情報保持性</div><div class="card-b">状態・構造・パターンを保持しやすい. 魔石・クリスタル・ジョブマテリア・石碑が記録媒体になる理由.</div></div>
+      <div class="card"><div class="card-t" style="color:var(--navy);">反応閾値操作性</div><div class="card-b">物質や生命の反応しやすさそのものを変える触媒的働き. 魔法・回復・レベルアップ・錬金が成立する原理.</div></div>
+      <div class="card"><div class="card-t" style="color:var(--navy);">位相固定性</div><div class="card-b">一度生じた現象・境界を一定時間固定する性質. 結界・バリア・空間圧縮・古代遺跡の異常保存に関わる.</div></div>
+    </div>
+    <div class="sh">魔法とは</div>
+    <div class="prose">魔素を脳内イメージ・スロット器官・結晶・術式・詠唱によって整形・流動・共鳴させ、現象として発現させる技術体系. 詠唱は「脳内イメージと魔素制御を安定化する同期プロトコル」に近い. 上級者ほど無詠唱でも成立する.</div>
+    <div class="sh">属性分類</div>
+    <div class="prose">火・水・風・土・光・闇・時空. 現地人は経験則と伝承で運用. 作者設定では「魔素がどの交差次元へ優先共鳴するかの分類」である.</div>
+    <div class="sh">トランスレイスとクリスタル</div>
+    <div class="prose">体内にスロット器官を持ちクリスタルを安全に扱える者をトランスレイスと呼ぶ. 全ヒト族の約1/1000程度. ジョブマテリアの職位によりC〜S級に分類される. レベル上昇・スキル取得によって覚醒し上限が上がることがある.</div>
+  </div>
+
+  <div class="wpnl" id="wp-race">
+    <div class="sh">ヒト族（通常種）</div>
+    <div class="grid3">
+      <div class="card"><div class="card-t c-wh">ヒューム（人間）</div><div class="card-b">世界人口の約50%. 知力・器用さが高い. トランスレイス発生率は最低. 平均寿命67才.</div></div>
+      <div class="card"><div class="card-t c-gr">エルフ</div><div class="card-b">約10%. 長命（300〜500才）で魔法親和性が高い. 繁殖力が低く保守的. 社会的成人は50才.</div></div>
+      <div class="card"><div class="card-t c-am">ドワーフ</div><div class="card-b">約10%. 筋力・技術力が高く暗所視が発達. 平均寿命150才. 戦の神派と技術の神派が対立.</div></div>
+      <div class="card"><div class="card-t c-wh">小人族</div><div class="card-b">約5%. 器用さ・敏捷性に優れる. 平均寿命62才. 農耕・調合・細工技術が卓越.</div></div>
+      <div class="card"><div class="card-t c-pu">ビースト</div><div class="card-b">約8%. 筋力・敏捷性・感覚が非常に高い. 魔力は極めて低い. 平均寿命70才.</div></div>
+      <div class="card"><div class="card-t c-pu">ワーウルフ</div><div class="card-b">約6%. 持久力・嗅覚が突出. 群れの絆が強い. 長距離追跡・偵察を担う者が多い.</div></div>
+      <div class="card"><div class="card-t c-te">ハイリザード</div><div class="card-b">約6%. 鱗による防御力が高い. 統一国家なし. 部族・氏族単位. 平均寿命50才.</div></div>
+    </div>
+    <div class="sh" style="margin-top:15px;">ヒト族（希少種）</div>
+    <div class="grid3">
+      <div class="card"><div class="card-t c-bl">龍人族</div><div class="card-b">伝説的希少. 魔力圧倒的最高. 体内に魔核を持ち核が傷つくと崩壊. 平均寿命1000年とも.</div></div>
+      <div class="card"><div class="card-t c-rd">デーモン</div><div class="card-b">魔大陸生息. ガルス残滓がDNAとして定着した生命体. 最もガルス残滓を収束させた個体が「魔王」となる.</div></div>
+      <div class="card"><div class="card-t c-wh">鬼人族</div><div class="card-b">ルフォレスフューテ最南端. 角・異色の肌. 戦神・死神への信仰. 強く死ぬことを美徳とする文化.</div></div>
+      <div class="card"><div class="card-t c-wh">ハーピー</div><div class="card-b">デア＝グラント険山南方. 背面から翼が生え、腕・手は別に存在. プシュケー商会のみ交易関係を持つ.</div></div>
+      <div class="card"><div class="card-t c-bl">マーフォーク</div><div class="card-b">深海・外洋に生息. 腰から下が魚型の尾ひれ. 水属性魔法親和性が高い. ペドラメとの限定的接触あり.</div></div>
+      <div class="card"><div class="card-t c-wh">巨人族</div><div class="card-b">ツェントルム中央山間部. 身長3〜4m. 文明は未発達. ドワーフとたまに交流がある極少数種.</div></div>
+    </div>
+    <div class="sh" style="margin-top:15px;">ハーフブラッドと社会的扱い</div>
+    <div class="prose">異種族間の交配で両親双方の特徴が混ざった稀少個体. 発生確率は低い. ラムール王国では「穢れた血」として最底辺に置かれる. オーブリン連邦では制度的差別は少ないが社会的偏見は残る.</div>
+    <div class="sh" style="margin-top:15px;">主要亜人族</div>
+    <div class="grid3">
+      <div class="card"><div class="card-t c-rd">ゴブリン</div><div class="card-b">最多個体数. 群れで戦術的行動をとる. 繁殖力が非常に高く駆除が困難. 最もヒト族から忌み嫌われる.</div></div>
+      <div class="card"><div class="card-t c-rd">オーク</div><div class="card-b">中〜大型. 猛突進型の高い戦闘力. ゴブリンと並んで危険視される. ゴブリンと混在して行動することも.</div></div>
+      <div class="card"><div class="card-t c-rd">オーガ</div><div class="card-b">大型（250〜320cm）. 単体破壊力はオークをはるかに超える. 魔石は大型で品質が高い.</div></div>
+      <div class="card"><div class="card-t c-rd">トロル</div><div class="card-b">強力な再生能力を持つ. 火・酸・光属性攻撃が再生を阻害. 通常兵器では倒せない厄介な存在.</div></div>
+      <div class="card"><div class="card-t c-rd">ミノタウロス</div><div class="card-b">牛頭人身. ダンジョン深層に好んで生息. 嗅覚に優れ侵入者を察知. 冒険者の重要な収入源.</div></div>
+      <div class="card"><div class="card-t c-rd">サイクロプス</div><div class="card-b">一つ目の巨大亜人族（350〜430cm）. 巨体の打撃は城壁を砕く. 非常に大きく高品質の魔石を持つ.</div></div>
+    </div>
+  </div>
+
+  <div class="wpnl" id="wp-dungeon">
+    <div class="sh">龍脈とは</div>
+    <div class="prose">地下深くで魔素が巨大な流れとなって循環する惑星規模の魔素循環網. 地表の気候・植生・魔物の発生・鉱物資源・生態系に大きな影響を与える. 国や都市の成立も多くが龍脈の影響下にある.</div>
+    <div class="sh">ダンジョンとは</div>
+    <div class="prose">龍脈から魔素が噴出・滞留するホットスポット. 地下迷宮型・洞窟型・森林迷宮型・遺跡融合型・砂漠オアシス型・湿地湖沼型など様々な形態を持つ. 魔石・希少鉱物・霊薬素材の産出源でもあり、「災厄と資源」の両面を持つ.</div>
+    <div class="sh">ダンジョン周辺で起こりやすいこと</div>
+    <div class="prose">魔物の高密度発生 / 魔石・希少鉱物・霊薬素材の産出 / 局所的な気候異常 / 植生の巨大化・特殊化 / 空間や地形の歪み</div>
+    <div class="sh">注目ダンジョン</div>
+    <div class="grid2">
+      <div class="card"><div class="card-t c-am">オアシス（ツェントルム）</div><div class="card-b">地下なのに柔らかな光・豊富な水・植生を持つ特殊空間. 龍脈の巨大噴出口. ドワーフ文明の心臓部. 常に資源の恵みと魔物の両方を吐き出す.</div></div>
+      <div class="card"><div class="card-t c-rd">魔大陸全域</div><div class="card-b">世界最大のダンジョン密度. 龍脈が地表に剥き出し. 魔素嵐・異常地形・巨大魔物・変異植生が多い. ガルス残滓の本拠地候補.</div></div>
+    </div>
+  </div>
+
+  <div class="wpnl" id="wp-currency">
+    <div class="sh">貨幣体系</div>
+    <div style="max-width:400px;margin-bottom:20px;">
+      <div class="money-row"><span class="money-k">銅貨（1ガルド）</span><span class="money-v">約150円</span></div>
+      <div class="money-row"><span class="money-k">大銅貨（10ガルド）</span><span class="money-v">約1,500円</span></div>
+      <div class="money-row"><span class="money-k">銀貨（100ガルド）</span><span class="money-v">約15,000円</span></div>
+      <div class="money-row"><span class="money-k">小金貨（2,000ガルド）</span><span class="money-v">約30万円</span></div>
+      <div class="money-row"><span class="money-k">大金貨（40,000ガルド）</span><span class="money-v">約600万円</span></div>
+      <div class="money-row"><span class="money-k">ミスリル貨（400,000ガルド）</span><span class="money-v">約6,000万円</span></div>
+    </div>
+    <div class="sh">暦・時間</div>
+    <div class="prose">1日24時間（地球換算では約25.2時間）/ 1年360日 / 5年に一度うるう年（361日）</div>
+  </div>
+</div>
+
+<div class="pg" id="pg-org">
+  <div class="ptitle pt-teal">組織・制度</div>
+  <div class="sw-row">
+    <div class="sw-btn act" id="osw-adv" onclick="so('adv',this)">冒険者ギルド</div>
+    <div class="sw-btn" id="osw-com" onclick="so('com',this)">商業ギルド</div>
+  </div>
+
+  <div id="ov-adv">
+    <div class="sh">基本概要</div>
+    <div class="prose">国家を越えた国際独立組織. 本部はオーブリン連邦. 国家からの完全独立にこだわり補助金を受け取らない. 魔物討伐・ダンジョン探索・護衛・採取依頼の仲介が主な役割. 国家間の戦闘行為には完全不介入.</div>
+    <div class="sh">冒険者ランク一覧</div>
+    <table class="rtbl">
+      <thead><tr><th>ランク</th><th>名称</th><th>ギルド証</th><th>概要</th></tr></thead>
+      <tbody>
+        <tr><td>F</td><td>見習い</td><td>紙（仮登録）</td><td>雑用・補助のみ. ダンジョン立入禁止.</td></tr>
+        <tr><td>E</td><td>駆け出し</td><td>木のプレート</td><td>採取・伝令・ポーター. 魔物討伐依頼なし.「石なし」と揶揄.</td></tr>
+        <tr><td>D</td><td>一人前</td><td>魔石付き鋼</td><td>ここから魔力紋登録. 戦闘任務解禁. 身分証として機能.</td></tr>
+        <tr><td>C</td><td>中堅</td><td>魔石付き銅</td><td>緊急依頼（スタンピード）の強制参加対象.</td></tr>
+        <tr><td>B</td><td>上位</td><td>銀</td><td>統括支部への推薦・審査が必要. 高い信用.</td></tr>
+        <tr><td>A</td><td>高位</td><td>金</td><td>本部で最終審査. 降格なし. 別格の信用.</td></tr>
+        <tr><td>S</td><td>伝説</td><td>ミスリル</td><td>歴史上数名のみ. 新規発行は世界的大事件レベル.</td></tr>
+      </tbody>
+    </table>
+    <div class="sh">Sランク現存者</div>
+    <div class="grid2">
+      <div class="card"><div class="card-t c-wh">イアン＝ギュネイス</div><div class="card-b">現役登録済み. Aランク冒険者20〜30人を瞬殺できる隔絶した実力. 黒騎士.</div></div>
+      <div class="card"><div class="card-t c-pu">百獣王レレベルガンザ</div><div class="card-b">現役登録済み兼ティエン王国国王. 周囲に迷惑をかけながら実力で黙らせるタイプ.</div></div>
+      <div class="card"><div class="card-t c-am">冒険王ゴンドワナ</div><div class="card-b">現役登録済み兼エイゼンハイム王国国王. 政務はこなすが本人は冒険に行きたがっている.</div></div>
+      <div class="card"><div class="card-t c-te">ジュンヒョク（龍人族）</div><div class="card-b">事実上引退・生息域に帰還. C級から長年かけて何度も覚醒した稀有な人物.</div></div>
+    </div>
+  </div>
+
+  <div id="ov-com" style="display:none">
+    <div class="sh">基本概要</div>
+    <div class="prose">国家を越えた国際独立組織. 本部はリブル共和国の港町ペドラメ. 商業活動の管理・認証・納税管理・秩序維持が主な役割. ラムール王国支部は洗脳による腐敗が進んでおり他国支部からの信用は低い.</div>
+    <div class="sh">商業ランク一覧</div>
+    <table class="rtbl">
+      <thead><tr><th>ランク</th><th>名称</th><th>年会費目安</th><th>概要</th></tr></thead>
+      <tbody>
+        <tr><td>D</td><td>露天商・行商</td><td>小金貨1枚（約30万円）</td><td>最低限の登録. 移動販売も兼ねる.</td></tr>
+        <tr><td>C</td><td>個人商店</td><td>小金貨3〜5枚</td><td>店舗を構えた個人商人.</td></tr>
+        <tr><td>B</td><td>特殊商店</td><td>小金貨10〜15枚</td><td>許可品目を1種類取得して販売可.</td></tr>
+        <tr><td>A</td><td>商会</td><td>大金貨1〜2枚（約600〜1200万円）</td><td>許可品目複数・多店舗展開可. 監査義務あり.</td></tr>
+      </tbody>
+    </table>
+    <div class="sh">奴隷制度の各国差異</div>
+    <div class="grid3">
+      <div class="card"><div class="card-t c-rd">ラムール王国</div><div class="card-b">広範に存在・洗脳による異常な拡大. 他種族はCランク以上商業登録不可.</div></div>
+      <div class="card"><div class="card-t c-bl">オーブリン連邦</div><div class="card-b">存在するが虐待禁止・解放条件など一定のルールあり.</div></div>
+      <div class="card"><div class="card-t c-gr">ルザリス帝国</div><div class="card-b">奴隷売買許可の取得自体が不可.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="pg" id="pg-gallery">
+  <div class="ptitle pt-purple">ギャラリー</div>
+  <div class="gnav">
+    <div class="gbtn act" id="gn-logo" onclick="sg('logo',this)">ロゴ</div>
+    <div class="gbtn" id="gn-akira_g" onclick="sg('akira_g',this)">アキラ設定画</div>
+    <div class="gbtn" id="gn-ema_g" onclick="sg('ema_g',this)">エマ設定画</div>
+  </div>
+  <div class="gp-pnl show" id="gp-logo"><div class="gal-img"><img src="title_logo.png" alt="タイトルロゴ"></div><div class="gal-cap">タイトルロゴ「幻想科学のプロローグ」— 星・月・歯車・回路が融合したデザイン</div></div>
+  <div class="gp-pnl" id="gp-akira_g"><div class="gal-img"><img src="アキラ.png" alt="アキラ設定画"></div><div class="gal-cap">アキラ＝ジェイ＝ラッシュバック 設定画（Standard Ver.）</div></div>
+  <div class="gp-pnl" id="gp-ema_g"><div class="gal-img"><img src="エマ.png" alt="エマ設定画"></div><div class="gal-cap">エマ＝ロベール（エメリア＝リーン＝ザウ＝フェルグレイス）設定画</div></div>
+</div>
+
+<div class="pg" id="pg-terms">
+  <div class="ptitle pt-green">用語集</div>
+  <div class="ti"><div class="tn">魔素（マソ）<span class="ttag tr">世界</span></div><div class="td">世界に満ちる根源エネルギー. すべての魔法の触媒. 龍脈として地下を巡り地表環境に影響を与える. 粒子・場・情報媒体・次元間干渉媒体の四つの性質を同時に持つ.</div></div>
+  <div class="ti"><div class="tn">龍脈（りゅうみゃく）<span class="ttag tr">世界</span></div><div class="td">地下深くで魔素が巨大な流れとなって循環する惑星規模の魔素循環網. 国や都市の立地にも影響する.</div></div>
+  <div class="ti"><div class="tn">術式（ジュツシキ）<span class="ttag tr">魔法</span></div><div class="td">魔素を特定の形に変換するための手順・公式. アキラはプログラムとして捉え理解を深めていく.</div></div>
+  <div class="ti"><div class="tn">トランスレイス<span class="ttag tr">魔法</span></div><div class="td">体内にスロット器官を持ちクリスタルを安全に扱える者. 全ヒト族の約1/1000. 覚醒によってランクが上がることがある.</div></div>
+  <div class="ti"><div class="tn">精神汚染<span class="ttag tr">重要</span></div><div class="td">アキラの人格再構成の原因. ラムール王国国王の異常行動の真相でもある. 世界の歪みに深く関わる現象.</div></div>
+  <div class="ti"><div class="tn">ガルス残滓<span class="ttag tr">重要</span></div><div class="td">宇宙歴時代の敵対勢力「ガルス軍」の残骸. 亜人族の体内魔石を媒体として利用し敵対行動を引き起こす.</div></div>
+</div>
+
+<div class="pg" id="pg-links">
+  <div class="ptitle pt-teal">作品リンク</div>
+  <div class="litem"><span class="ln">小説家になろう</span><span class="lnote">リンク未設定</span></div>
+  <div class="litem"><span class="ln">カクヨム</span><span class="lnote">リンク未設定</span></div>
+  <div class="litem"><span class="ln">X（旧Twitter）</span><span class="lnote">リンク未設定</span></div>
+</div>
+
+<div class="pg" id="pg-updates">
+  <div class="ptitle pt-teal">更新履歴</div>
+  <div class="ul2">
+    <div class="urow"><span class="udate">2026-05-06</span><span class="utxt">データベース大幅拡充（コントラスト調整版へ修正）<span class="ubadge u-add">更新</span></span></div>
+    <div class="urow"><span class="udate">2026-04-25</span><span class="utxt">設定資料館 公開<span class="ubadge u-new">NEW</span></span></div>
+  </div>
+</div>
+
+</div><script>
+var dds=['dd-chara','dd-world','dd-org','dd-gallery'];
+function ca(){dds.forEach(function(id){document.getElementById(id).classList.remove('show');});document.querySelectorAll('.nb-btn').forEach(function(b){b.classList.remove('open');});}
+function tdd(id,btn){var open=document.getElementById(id).classList.contains('show');ca();if(!open){document.getElementById(id).classList.add('show');btn.classList.add('open');}}
+document.addEventListener('click',function(e){if(!e.target.closest('.ni'))ca();});
+
+function spg(id){document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('show');});document.getElementById('pg-'+id).classList.add('show');}
+function sna(id){document.querySelectorAll('.nb-btn').forEach(function(b){b.classList.remove('act');});var m={'chara':'nb-chara','world':'nb-world','org':'nb-org','gallery':'nb-gallery'};if(m[id]&&document.getElementById(m[id]))document.getElementById(m[id]).classList.add('act');}
+
+function gp(id){spg(id);sna(id);}
+
+function gc(id){
+  spg('chara');sna('chara');
+  document.querySelectorAll('[id^="cv-"]').forEach(function(e){e.style.display='none';});
+  document.getElementById('cv-'+id).style.display='';
+  document.querySelectorAll('.sw-btn').forEach(function(b){b.classList.remove('act');});
+  var s=document.getElementById('csw-'+id);
+  if(s)s.classList.add('act');
+}
+function sc(id,btn){
+  document.querySelectorAll('[id^="cv-"]').forEach(function(e){e.style.display='none';});
+  document.getElementById('cv-'+id).style.display='';
+  document.querySelectorAll('.sw-btn').forEach(function(b){b.classList.remove('act');});
+  btn.classList.add('act');
+}
+
+function gw(id){spg('world');sna('world');sw(id,document.getElementById('wn-'+id));}
+function sw(id,btn){
+  document.querySelectorAll('.wpnl').forEach(function(p){p.classList.remove('show');});
+  document.getElementById('wp-'+id).classList.add('show');
+  document.querySelectorAll('.wbtn').forEach(function(b){b.classList.remove('act');});
+  if(btn)btn.classList.add('act');
+}
+
+function go2(id){spg('org');sna('org');so(id,document.getElementById('osw-'+id));}
+function so(id,btn){
+  document.querySelectorAll('[id^="ov-"]').forEach(function(e){e.style.display='none';});
+  document.getElementById('ov-'+id).style.display='';
+  document.querySelectorAll('.sw-btn').forEach(function(b){b.classList.remove('act');});
+  if(btn)btn.classList.add('act');
+}
+
+function gg(id){spg('gallery');sna('gallery');sg(id,document.getElementById('gn-'+id));}
+function sg(id,btn){
+  document.querySelectorAll('.gp-pnl').forEach(function(p){p.classList.remove('show');});
+  document.getElementById('gp-'+id).classList.add('show');
+  document.querySelectorAll('.gbtn').forEach(function(b){b.classList.remove('act');});
+  if(btn)btn.classList.add('act');
+}
+
+function ctab(tid,pid,idx){
+  var tabs=document.querySelectorAll('#'+tid+' .tab');
+  tabs.forEach(function(t){t.classList.remove('act');});
+  tabs[idx].classList.add('act');
+  var panels=document.querySelectorAll('#'+pid+'>div');
+  panels.forEach(function(p){p.style.display='none';});
+  if(panels[idx])panels[idx].style.display='';
+}
+</script>
+</body>
+</html>
