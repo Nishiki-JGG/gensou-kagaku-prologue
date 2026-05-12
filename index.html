@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>幻想科学のプロローグ — 設定資料館</title>
+<meta name="description" content="SFと魔法が交差する異世界ファンタジー『幻想科学のプロローグ』の公式設定資料館。キャラクター、世界設定、種族、ギルド制度、用語集を掲載。">
+<meta property="og:title" content="幻想科学のプロローグ — 設定資料館">
+<meta property="og:description" content="未来技術を持つ異世界人が、魔法世界を科学で切り開く異世界ファンタジーの公式設定資料館。">
+<meta property="og:image" content="https://nishiki-jgg.github.io/gensou-kagaku-prologue/title_logo.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nishiki-jgg.github.io/gensou-kagaku-prologue/">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500&display=swap');
 :root{
@@ -23,14 +30,23 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-serif;min-height:100vh;line-height:1.6;}
 
+/* ============================================================
+   CSS構造
+   1. 変数・リセット
+   2. ヘッダー・ナビバー
+   3. レイアウト・共通パーツ（タイトル・カード・タグ等）
+   4. キャラクター
+   5. 世界設定・組織
+   6. ギャラリー・用語・更新履歴・リンク
+   7. 追加機能（小説リンクボタン・ネタバレ・モーダル・初めての方へ）
+============================================================ */
+
 /* HEADER */
-.hdr{background:#ffffff;display:flex;flex-direction:column;align-items:center;padding:32px 16px 20px;border-bottom:3px solid var(--navy);box-shadow:0 2px 12px rgba(42,52,104,0.10);}
-.hdr-logo-wrap{display:flex;align-items:center;justify-content:center;}
-.hdr img{width:420px;max-width:90vw;object-fit:contain;filter:drop-shadow(0 2px 12px rgba(42,52,104,0.13));}
-.hdr-sub{font-size:12px;color:#3a4688;letter-spacing:.25em;margin-top:10px;font-weight:700;}
+.hdr{display:none;}
 
 /* NAVBAR */
-.nb{background:#ffffff;border-bottom:2px solid var(--bd);display:flex;flex-wrap:wrap;justify-content:center;gap:4px;padding:6px 8px;position:sticky;top:0;z-index:500;box-shadow:0 2px 8px rgba(42,52,104,0.08);}
+.nb{background:#ffffff;border-bottom:2px solid var(--bd);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px;padding:4px 8px;position:sticky;top:0;z-index:500;box-shadow:0 2px 8px rgba(42,52,104,0.08);}
+.nb-logo{height:44px;object-fit:contain;margin-right:6px;filter:drop-shadow(0 1px 3px rgba(42,52,104,0.12));}
 .ni{position:relative;}
 .nb-btn{display:flex;align-items:center;gap:4px;padding:10px 15px;font-size:13px;color:var(--tm);cursor:pointer;border-radius:5px;transition:all .2s;white-space:nowrap;user-select:none;font-weight:500;}
 .nb-btn:hover,.nb-btn.open{background:var(--bg3);color:var(--tp);}
@@ -172,6 +188,59 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
 .money-row{display:flex;justify-content:space-between;padding:8px 12px;background:#ffffff;border-radius:6px;font-size:13px;margin-bottom:5px;border:1px solid var(--bds);}
 .money-k{color:var(--navy);font-weight:700;}
 .money-v{color:var(--tp);}
+
+/* 「小説を読む」ボタン */
+.read-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:18px;}
+.read-btn{display:inline-block;padding:13px 28px;border-radius:8px;font-size:15px;font-weight:700;text-decoration:none;transition:all .2s;letter-spacing:.05em;}
+.read-btn-n{background:#00a0e9;color:#fff;border:2px solid #0080c0;}
+.read-btn-n:hover{background:#0080c0;}
+.read-btn-k{background:#3ac;color:#fff;border:2px solid #2a9a99;}
+.read-btn-k:hover{background:#2a9a99;}
+
+/* ネタバレバッジ */
+.spoiler-tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px;margin-left:8px;vertical-align:middle;}
+.sp-light{background:#fff3cd;color:#856404;border:1px solid #ffc107;}
+.sp-heavy{background:#f8d7da;color:#842029;border:1px solid #f5c2c7;}
+.sp-author{background:#e2d9f3;color:#4a1080;border:1px solid #c0a0e0;}
+.spoiler-warn{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-radius:7px;margin-bottom:14px;font-size:13px;}
+.sw-light{background:#fff8e1;border:1px solid #ffc107;color:#6a4800;}
+.sw-heavy{background:#fdf0f0;border:1px solid #f5c2c7;color:#842029;}
+.sw-author{background:#f0ebfa;border:1px solid #c0a0e0;color:#4a1080;}
+.spoiler-warn-icon{font-size:18px;line-height:1;}
+
+/* 画像モーダル */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:9000;align-items:center;justify-content:center;cursor:zoom-out;}
+.modal-overlay.show{display:flex;}
+.modal-img{max-width:92vw;max-height:92vh;object-fit:contain;border-radius:6px;box-shadow:0 8px 48px rgba(0,0,0,0.7);}
+.modal-close{position:fixed;top:18px;right:22px;font-size:32px;color:#fff;cursor:pointer;line-height:1;z-index:9001;}
+.img-clickable{cursor:zoom-in;}
+.img-hint{font-size:12px;color:var(--tm);margin-top:8px;text-align:center;}
+
+/* 「初めての方へ」セクション専用 */
+.intro-flow{display:flex;flex-direction:column;gap:0;max-width:420px;margin:20px 0;}
+.intro-flow-step{display:flex;align-items:flex-start;gap:14px;padding:12px 0;}
+.intro-flow-step:not(:last-child){border-bottom:1px solid var(--bds);}
+.flow-num{width:28px;height:28px;min-width:28px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.flow-txt{font-size:14px;color:var(--ts);line-height:1.7;}
+
+/* スポイラー折りたたみ */
+.spoiler-block{margin:16px 0;border-radius:8px;overflow:hidden;border:2px solid;}
+.spoiler-block.sp-lv1{border-color:#ffc107;}
+.spoiler-block.sp-lv2{border-color:#f5c2c7;}
+.spoiler-block.sp-lv3{border-color:#c0a0e0;}
+.spoiler-toggle{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer;user-select:none;font-weight:700;font-size:14px;gap:12px;}
+.spoiler-block.sp-lv1 .spoiler-toggle{background:#fff8e1;color:#6a4800;}
+.spoiler-block.sp-lv2 .spoiler-toggle{background:#fdf0f0;color:#842029;}
+.spoiler-block.sp-lv3 .spoiler-toggle{background:#f0ebfa;color:#4a1080;}
+.spoiler-toggle-icon{font-size:18px;flex-shrink:0;}
+.spoiler-arrow{font-size:12px;transition:transform .2s;flex-shrink:0;}
+.spoiler-content{display:none;padding:16px;background:#ffffff;border-top:1px solid;}
+.spoiler-block.sp-lv1 .spoiler-content{border-color:#ffc107;}
+.spoiler-block.sp-lv2 .spoiler-content{border-color:#f5c2c7;}
+.spoiler-block.sp-lv3 .spoiler-content{border-color:#c0a0e0;}
+.spoiler-block.open .spoiler-content{display:block;}
+.spoiler-block.open .spoiler-arrow{transform:rotate(180deg);}
+
 </style>
 </head>
 <body>
@@ -184,14 +253,15 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
 </div>
 
 <nav class="nb" id="navbar">
+  <img src="title_logo.png" alt="幻想科学のプロローグ" class="nb-logo">
   <div class="ni"><div class="nb-btn act" onclick="gp('top');ca();">トップ</div></div>
   <div class="ni"><div class="nb-btn" onclick="gp('intro');ca();">はじめに</div></div>
+  <div class="ni"><div class="nb-btn" onclick="gp('first');ca();">初めての方へ</div></div>
   <div class="ni">
     <div class="nb-btn" id="nb-chara" onclick="tdd('dd-chara',this)">キャラクター <span class="nb-arr">▼</span></div>
     <div class="dd" id="dd-chara">
       <div class="ddi" onclick="gc('akira');ca();">アキラ</div>
       <div class="ddi" onclick="gc('ema');ca();">エマ</div>
-      <div class="ddi" onclick="gc('al');ca();">アル</div>
       <div class="dd-sep"></div>
       <div class="ddi" onclick="gc('party');ca();">序盤パーティ</div>
       <div class="ddi" onclick="gc('guild_party');ca();">導きの輪環</div>
@@ -233,8 +303,33 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
 
 <div class="main">
 
+<!-- ============================================================
+     セクション一覧
+     - pg-top        : トップページ
+     - pg-first      : 初めての方へ
+     - pg-intro      : はじめに
+     - pg-chara      : キャラクター
+     - pg-world      : 世界設定
+     - pg-org        : 組織・制度
+     - pg-gallery    : ギャラリー
+     - pg-terms      : 用語集
+     - pg-links      : 作品リンク
+     - pg-updates    : 更新履歴
+============================================================ -->
+
+<!-- ========== トップページ ========== -->
 <div class="pg show" id="pg-top">
-  <div class="hero"><p>魔法と科学が交差する世界——。<br>未来技術を持つ異世界人が、幻想の大陸に降り立つ。<br>「幻想科学のプロローグ」公式世界観資料館へようこそ。</p></div>
+  <div style="text-align:center;padding:32px 16px 16px;">
+    <img src="title_logo.png" alt="幻想科学のプロローグ" style="width:560px;max-width:92vw;object-fit:contain;filter:drop-shadow(0 4px 18px rgba(42,52,104,0.15));">
+  </div>
+  <div class="hero">
+    <p>魔法と科学が交差する世界——。<br>未来技術を持つ異世界人が、幻想の大陸に降り立つ。<br>「幻想科学のプロローグ」公式世界観資料館へようこそ。</p>
+    <div style="margin-top:14px;font-size:13px;color:var(--tm);">本サイトは設定資料館です。一部ネタバレを含むため、初めての方は本編から読むことをおすすめします。</div>
+    <div class="read-btns">
+      <a href="https://ncode.syosetu.com/n9349dp/" target="_blank" rel="noopener" class="read-btn read-btn-n">小説家になろうで読む</a>
+      <a href="https://kakuyomu.jp/works/2912051598200344740" target="_blank" rel="noopener" class="read-btn read-btn-k">カクヨムで読む</a>
+    </div>
+  </div>
   <div class="top-grid">
     <div class="tcard" onclick="gc('akira')"><div class="tcard-num" style="color:var(--navy);">7+</div><div class="tcard-lbl">キャラクター</div></div>
     <div class="tcard" onclick="gw('map')"><div class="tcard-num" style="color:#3040a0;">4</div><div class="tcard-lbl">大陸・国家</div></div>
@@ -245,6 +340,36 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
   </div>
 </div>
 
+<!-- ========== 初めての方へ ========== -->
+<div class="pg" id="pg-first">
+  <div class="ptitle pt-blue">初めての方へ</div>
+  <div style="background:#ffffff;border:1px solid var(--bd);border-radius:8px;padding:25px;max-width:620px;margin-bottom:20px;box-shadow:0 1px 6px rgba(42,52,104,0.07);">
+    <div class="prose" style="font-size:15px;color:var(--tp);line-height:2.1;">『幻想科学のプロローグ』は、SFから始まり、剣と魔法の異世界へ接続するファンタジーです。<br><br>コールドスリープから目覚めた主人公が見たのは、自分が関わった惑星が、いつの間にか魔法世界へと変貌した姿でした。</div>
+    <div class="sh" style="margin-top:18px;">本サイトについて</div>
+    <div class="prose">本サイトは、作品のキャラクター・世界設定・用語などをまとめた公式設定資料館です。一部ページには、本編の展開や世界の真相に関わる情報を含みます。初めての方は、まず本編から読むことをおすすめします。</div>
+    <div class="sh" style="margin-top:18px;">おすすめの順番</div>
+    <div class="intro-flow">
+      <div class="intro-flow-step"><div class="flow-num">1</div><div class="flow-txt"><strong>本編を読む</strong>（なろう・カクヨムで無料公開中）</div></div>
+      <div class="intro-flow-step"><div class="flow-num">2</div><div class="flow-txt">キャラクター紹介を見る</div></div>
+      <div class="intro-flow-step"><div class="flow-num">3</div><div class="flow-txt">世界設定を見る</div></div>
+      <div class="intro-flow-step"><div class="flow-num">4</div><div class="flow-txt">用語集で気になる単語を確認する</div></div>
+      <div class="intro-flow-step"><div class="flow-num">5</div><div class="flow-txt">既読後に詳細設定・裏設定を見る</div></div>
+    </div>
+    <div class="read-btns" style="justify-content:flex-start;margin-top:20px;">
+      <a href="https://ncode.syosetu.com/n9349dp/" target="_blank" rel="noopener" class="read-btn read-btn-n">小説家になろうで読む</a>
+      <a href="https://kakuyomu.jp/works/2912051598200344740" target="_blank" rel="noopener" class="read-btn read-btn-k">カクヨムで読む</a>
+    </div>
+  </div>
+  <div class="ptitle pt-red" style="margin-top:10px;">ネタバレについて</div>
+  <div style="background:#ffffff;border:1px solid var(--bd);border-radius:8px;padding:20px;max-width:620px;box-shadow:0 1px 6px rgba(42,52,104,0.07);">
+    <div class="prose" style="margin-bottom:16px;">本サイトの設定資料は、以下の区分で管理しています。</div>
+    <div class="spoiler-warn sw-light"><span class="spoiler-warn-icon">⚠</span><div><strong>軽いネタバレあり</strong>　本編序盤以降で明かされる設定を含みます。種族・ギルド・国家・魔法体系など。</div></div>
+    <div class="spoiler-warn sw-heavy"><span class="spoiler-warn-icon">⚠</span><div><strong>重大ネタバレあり</strong>　世界の真相や今後の展開に関わる情報を含みます。</div></div>
+    <div class="spoiler-warn sw-author"><span class="spoiler-warn-icon">⚠</span><div><strong>作者用裏設定</strong>　未公開設定・今後の展開・黒幕情報を含みます。</div></div>
+  </div>
+</div>
+
+<!-- ========== はじめに ========== -->
 <div class="pg" id="pg-intro">
   <div class="ptitle pt-blue">はじめに</div>
   <div style="background:#ffffff;border:1px solid var(--bd);border-radius:8px;padding:25px;max-width:600px;margin-bottom:16px;box-shadow:0 1px 6px rgba(42,52,104,0.07);">
@@ -254,12 +379,12 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
   </div>
 </div>
 
+<!-- ========== キャラクター ========== -->
 <div class="pg" id="pg-chara">
   <div class="ptitle pt-gold">キャラクター</div>
   <div class="sw-row">
     <div class="sw-btn act" id="csw-akira" onclick="sc('akira',this)">アキラ</div>
     <div class="sw-btn" id="csw-ema" onclick="sc('ema',this)">エマ</div>
-    <div class="sw-btn" id="csw-al" onclick="sc('al',this)">アル</div>
     <div class="sw-btn" id="csw-party" onclick="sc('party',this)">序盤パーティ</div>
     <div class="sw-btn" id="csw-guild_party" onclick="sc('guild_party',this)">導きの輪環</div>
     <div class="sw-btn" id="csw-npc" onclick="sc('npc',this)">その他NPC</div>
@@ -287,15 +412,24 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
               <div class="sr"><span class="sk">出身</span><span class="sv">シュトライゼル共和国</span></div>
               <div class="sr"><span class="sk">階級</span><span class="sv">少佐</span></div>
             </div>
-            <div class="cdesc">「頭はSF、心はファンタジー」。超未来技術で最適化された美しい肉体とAIに支えられた異質な戦闘力を持ちながら、本人は「ちゃんと生きて、ちゃんと暮らしたい」という感覚を捨てていない。</div>
+            <div class="cdesc">「頭はSF、心はファンタジー」。超未来技術で最適化された美しい肉体と異質な戦闘力を持ちながら、本人は「ちゃんと生きて、ちゃんと暮らしたい」という感覚を捨てていない。</div>
+            <div class="sr" style="margin-top:8px;"><span class="sk">口癖</span><span class="sv">「悪くない」</span></div>
           </div>
         </div>
       </div>
       <div style="display:none">
         <div class="sh">人格構造（アキラ7割・ジェイク3割）</div>
         <div class="prose">表層（驚き・喜び・ツッコミ・生活感覚）はアキラ寄り。危機対応・技術判断・一線を越えた時の冷たさはジェイクの残滓が前へ出る。完全な二重人格ではなく、深層に沈んだ判断基準として共存している。</div>
-        <div class="sh">搭載AI「アル」（第三十三話で命名）</div>
-        <div class="prose">脳・身体・ナノマシン・装備・情報処理を支える第二の脳。記憶修復、言語補正、戦闘補助、ラボ・ファクトリー構築まで担当。常に冷静・正確・簡潔。アキラが感情を、AIが構造を支える関係。発話は『　』。対外的には特殊な精霊「アル」として偽装可能。</div>
+        <div class="sh">搭載AI</div>
+        <div class="spoiler-block sp-lv2">
+          <div class="spoiler-toggle" onclick="toggleSpoiler(this.parentElement)">
+            <span><span class="spoiler-toggle-icon">⚠</span>　重大ネタバレあり ― AIの詳細・対外的偽装</span>
+            <span class="spoiler-arrow">▼</span>
+          </div>
+          <div class="spoiler-content">
+            <div class="prose">脳・身体・ナノマシン・装備・情報処理を支える第二の脳。記憶修復、言語補正、戦闘補助、ラボ・ファクトリー構築まで担当。常に冷静・正確・簡潔。アキラが感情を、AIが構造を支える関係。発話は『　』。対外的には特殊な精霊「アル」として偽装可能。</div>
+          </div>
+        </div>
         <div class="sh">価値観</div>
         <div class="prose">助けてもらった恩は返す／快適第一／興味を持ったらとことん調べる／身内と弱者を守る／弱者への暴力は許さない／自由に生きたい／他人にやさしくありたい</div>
       </div>
@@ -322,41 +456,72 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
           <div class="cimg"><img src="エマ.png" alt="エマ"></div>
           <div class="cinfo">
             <div class="cname">エマ＝ロベール</div>
-            <div class="cfn">本名：エメリア＝リーン＝ザウ＝フェルグレイス</div>
-            <div class="tags"><span class="tag tg">エルフ</span><span class="tag tp">魔法使い</span><span class="tag tb">公爵家三女</span><span class="tag ty">皇統接続者</span></div>
+            <div class="spoiler-block sp-lv1" style="margin:6px 0 10px;">
+              <div class="spoiler-toggle" onclick="toggleSpoiler(this.parentElement)">
+                <span><span class="spoiler-toggle-icon">⚠</span>　軽いネタバレ ― 素性・家柄</span>
+                <span class="spoiler-arrow">▼</span>
+              </div>
+              <div class="spoiler-content" style="padding:10px 14px;">
+                <div class="cfn" style="margin-bottom:6px;">本名：エメリア＝リーン＝ザウ＝フェルグレイス</div>
+                <div class="tags"><span class="tag tg">エルフ</span><span class="tag tp">魔法使い</span><span class="tag tb">公爵家三女</span><span class="tag ty">皇統接続者</span></div>
+                <div class="sr" style="margin-top:8px;"><span class="sk">父</span><span class="sv">帝国宰相セルディオ</span></div>
+              </div>
+            </div>
             <div class="cstat">
               <div class="sr"><span class="sk">年齢</span><span class="sv">48歳（エルフの若者）</span></div>
               <div class="sr"><span class="sk">身長</span><span class="sv">162cm / 48kg</span></div>
               <div class="sr"><span class="sk">瞳</span><span class="sv">翡翠色（高出力時：金光）</span></div>
               <div class="sr"><span class="sk">武器</span><span class="sv">魔法杖（ロッド）</span></div>
               <div class="sr"><span class="sk">出身</span><span class="sv">ルザリス帝国</span></div>
-              <div class="sr"><span class="sk">父</span><span class="sv">帝国宰相セルディオ</span></div>
             </div>
-            <div class="cdesc">皇室の血を引く公爵家の娘でありながら、肩書きも美貌も恐れの象徴である金の瞳さえもフードの下に隠し、自分の力で一人前になろうともがく意地っ張りで気高い未完成の若きエルフ。</div>
+            <div class="cdesc">フードの下に素性を隠し、自分の力で一人前になろうともがく意地っ張りで気高い未完成の若きエルフ。</div>
           </div>
         </div>
       </div>
       <div style="display:none">
         <div class="sh">勅光の瞳（ちょっこうのひとみ）</div>
-        <div class="prose">強い魔力を解放した時のみ翡翠色の瞳の奥に金の光が滲む. 帝国では命令と支配の象徴. 一般人には不吉、宮廷関係者には政治的重みの可視化として受け取られる. エマ本人はこれを見られることを深く嫌っている.</div>
-        <div class="sh">ザウ称号と命名規則</div>
-        <div class="prose">ルザリス帝国の皇統接続者が名前に持つ称号.「名＝序列称号＝ザウ＝家名」の構造. 女性は「リーン」、男性は「ラース」、現皇帝のみ「ファラコル」を持つ.</div>
-        <div class="sh">家を出た理由</div>
-        <div class="prose">美貌や血筋ばかり見られ自分自身を評価されないことへの反発. 妾腹の娘として家内での立場も微妙で、常に「守られるべき娘」として扱われた. 自分の力で生きるため冒険者として家を出た.</div>
+        <div class="prose">強い魔力を解放した時のみ翡翠色の瞳の奥に金の光が滲む。帝国では命令と支配の象徴。一般人には不吉、宮廷関係者には政治的重みの可視化として受け取られる。エマ本人はこれを見られることを深く嫌っている。</div>
+        <div class="spoiler-block sp-lv1" style="margin:16px 0 8px;">
+          <div class="spoiler-toggle" onclick="toggleSpoiler(this.parentElement)">
+            <span><span class="spoiler-toggle-icon">⚠</span>　軽いネタバレ ― ザウ称号・家を出た理由</span>
+            <span class="spoiler-arrow">▼</span>
+          </div>
+          <div class="spoiler-content">
+            <div class="sh">ザウ称号と命名規則</div>
+            <div class="prose">ルザリス帝国の皇統接続者が名前に持つ称号。「名＝序列称号＝ザウ＝家名」の構造。女性は「リーン」、男性は「ラース」、現皇帝のみ「ファラコル」を持つ。</div>
+            <div class="sh">家を出た理由</div>
+            <div class="prose">美貌や血筋ばかり見られ自分自身を評価されないことへの反発。妾腹の娘として家内での立場も微妙で、常に「守られるべき娘」として扱われた。自分の力で生きるため冒険者として家を出た。</div>
+          </div>
+        </div>
       </div>
       <div style="display:none">
-        <div class="sh" style="color:#9a1010;border-left-color:#9a1010;">ネタバレ注意</div>
-        <div class="prose" style="color:#8a0808;">エマの仲間だった人物の一人は父・セルディオの密命を受けた監視役だった. エマはそれを知らない. 監視役は任務を超えて本心からエマを守る側へ回り今回死亡している. 定期報告が途絶えたことでセルディオは異常を察知し、今後ペドラメやルザリス側への水面下の接触が始まる.</div>
+        <div class="spoiler-block sp-lv2">
+          <div class="spoiler-toggle" onclick="toggleSpoiler(this.parentElement)">
+            <span><span class="spoiler-toggle-icon">⚠</span>　重大ネタバレ ― 父セルディオ・監視役の真相</span>
+            <span class="spoiler-arrow">▼</span>
+          </div>
+          <div class="spoiler-content">
+            <div class="prose">エマの仲間だった人物の一人は父・セルディオの密命を受けた監視役だった。エマはそれを知らない。監視役は任務を超えて本心からエマを守る側へ回り今回死亡している。定期報告が途絶えたことでセルディオは異常を察知し、今後ペドラメやルザリス側への水面下の接触が始まる。</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <div id="cv-al" style="display:none">
-    <div class="npc-card" style="max-width:520px;">
-      <div class="npc-name">アル（ジェイク搭載AI）</div>
-      <div class="npc-sub">第三十三話でアキラが命名. 対外的偽装名：精霊アル</div>
-      <div class="tags" style="margin-top:10px;"><span class="tag tb">AI</span><span class="tag tw">第二の脳</span><span class="tag tg">中核補助存在</span></div>
-      <div class="npc-body" style="margin-top:10px; font-size:14px;">アキラの脳・身体・ナノマシン・装備・情報処理を支える中核AI. 記憶修復、言語補正、戦闘補助、研究再開、ラボ・ファクトリー構築、魔法・遺跡解析まで役割は広い.<br><br>発話は『　』. 常に冷静・正確・簡潔. 道具以上・人格未満. 無機質だが面倒見はよく、保護者めいた動きをする. 冗談は言わないが返答がシュールになることがある.<br><br>対外的にはナノマシン投影によって小型の光の精霊のような外見を演出できる（エマには共有済み）.</div>
+    <div class="spoiler-block sp-lv2" style="max-width:520px;margin-bottom:16px;">
+      <div class="spoiler-toggle" onclick="toggleSpoiler(this.parentElement)">
+        <span><span class="spoiler-toggle-icon">⚠</span>　重大ネタバレあり ― アル（第33話以降の設定）</span>
+        <span class="spoiler-arrow">▼</span>
+      </div>
+      <div class="spoiler-content">
+        <div class="npc-card" style="border:none;padding:0;box-shadow:none;">
+          <div class="npc-name">アル（ジェイク搭載AI）</div>
+          <div class="npc-sub">アキラに搭載されたAI。対外的偽装名あり</div>
+          <div class="tags" style="margin-top:10px;"><span class="tag tb">AI</span><span class="tag tw">第二の脳</span><span class="tag tg">中核補助存在</span></div>
+          <div class="npc-body" style="margin-top:10px;font-size:14px;">アキラの脳・身体・ナノマシン・装備・情報処理を支える中核AI。記憶修復、言語補正、戦闘補助、研究再開、ラボ・ファクトリー構築、魔法・遺跡解析まで役割は広い。<br><br>発話は『　』。常に冷静・正確・簡潔。道具以上・人格未満。無機質だが面倒見はよく、保護者めいた動きをする。冗談は言わないが返答がシュールになることがある。<br><br>対外的にはナノマシン投影によって小型の光の精霊のような外見を演出できる（エマには共有済み）。</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -405,9 +570,15 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
   </div>
 
   <div id="cv-guild_party" style="display:none">
-    <div class="sh">Aランクパーティ「導きの輪環」</div>
-    <div class="prose">この大陸でも上位に入るAランクパーティ. 名前だけで場の空気が変わる「上の世界」の象徴. エメルネスト廃坑の異常湧き対応で招集される.</div>
-    <div class="npc-grid">
+    <div class="spoiler-block sp-lv1">
+      <div class="spoiler-toggle" onclick="toggleSpoiler(this.parentElement)">
+        <span><span class="spoiler-toggle-icon">⚠</span>　軽いネタバレ ― Aランクパーティ「導きの輪環」（未登場）</span>
+        <span class="spoiler-arrow">▼</span>
+      </div>
+      <div class="spoiler-content">
+        <div class="sh">Aランクパーティ「導きの輪環」</div>
+        <div class="prose">この大陸でも上位に入るAランクパーティ。名前だけで場の空気が変わる「上の世界」の象徴。エメルネスト廃坑の異常湧き対応で招集される。</div>
+        <div class="npc-grid">
       <div class="npc-card">
         <div class="npc-name">リブ＝マクスウェル</div>
         <div class="npc-sub">ヒューム / Aランク / 38才 / リーダー</div>
@@ -432,6 +603,8 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
         <div class="npc-name">リア＝マクスウェル</div>
         <div class="npc-sub">ヒューム / Bランク / 30才 / ソーサラー</div>
         <div class="npc-body">リブの妹. 一人称「私」. 冷静で理性的. 兄の軽さに振り回されつつパーティの理性側を支える. まず人を観察してから判断するタイプ.<br><span style="color:var(--navy);font-size:12px;font-style:italic;">「あ、兄がいつもすみません…」</span></div>
+      </div>
+    </div>
       </div>
     </div>
   </div>
@@ -460,32 +633,40 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
         <div class="npc-body">季節の野菜を気安く勧め、エマにおまけをつける軽口役. 市場に馴染んできた二人を象徴する存在. 日常の生活感を出す.</div>
       </div>
     </div>
-    <div class="sh" style="margin-top:20px;">今後登場予定</div>
-    <div class="npc-grid">
-      <div class="npc-card">
-        <div class="npc-name">ドグラン</div>
-        <div class="npc-sub">ドワーフ / 82才 / 鍛冶職人</div>
-        <div class="npc-body">工房『アズベルトの槌』. かつての伝説の鍛冶師. 未知の金属・技術にテンションが爆上がりする職人気質. 一人称「ワシ」. 後のアキラ側専属鍛冶師候補.</div>
+    <div class="spoiler-block sp-lv1" style="margin-top:20px;">
+      <div class="spoiler-toggle" onclick="toggleSpoiler(this.parentElement)">
+        <span><span class="spoiler-toggle-icon">⚠</span>　軽いネタバレ ― 今後登場予定キャラクター</span>
+        <span class="spoiler-arrow">▼</span>
       </div>
-      <div class="npc-card">
-        <div class="npc-name">リファニー＝キーン</div>
-        <div class="npc-sub">小人族 / 25才前後 / 錬金術師</div>
-        <div class="npc-body">セージグリーンの髪. ヴェルクハーフェン錬金術師ギルド所属. 専門は抽出・蒸留・乳化・保存処理. 研究バカ. アキラの美容・衛生商品を「新しい錬金術分野」と捉える. 笑い方「ぐふふ…」.</div>
-      </div>
-      <div class="npc-card">
-        <div class="npc-name">セレナ＝プシュケー</div>
-        <div class="npc-sub">ヒューム / 27才 / 商人</div>
-        <div class="npc-body">三大大陸に名を馳せるプシュケー商会の四女. 素性を隠し各地で武者修行中. アキラの未知商品群に興味を持ち、独立商会でアキラ商品を独占したい野望を持つ.</div>
-      </div>
-      <div class="npc-card">
-        <div class="npc-name">リゼット＝ヴァルシュ</div>
-        <div class="npc-sub">ヒューム / 24才 / 商会令嬢</div>
-        <div class="npc-body">オーブリン連邦政争接続編で登場予定. 距離が近くアキラへ積極的に接近するタイプ. 政争編の案内役・商業上層との接続役. エマの感情を揺らす存在.</div>
+      <div class="spoiler-content">
+        <div class="npc-grid">
+          <div class="npc-card">
+            <div class="npc-name">ドグラン</div>
+            <div class="npc-sub">ドワーフ / 82才 / 鍛冶職人</div>
+            <div class="npc-body">工房『アズベルトの槌』。偏屈で頑固な鍛冶師。未知の金属・技術にテンションが爆上がりする職人気質。一人称「ワシ」。後のアキラ側専属鍛冶師候補。</div>
+          </div>
+          <div class="npc-card">
+            <div class="npc-name">リファニー＝キーン</div>
+            <div class="npc-sub">小人族 / 25才前後 / 錬金術師</div>
+            <div class="npc-body">セージグリーンの髪。ヴェルクハーフェン錬金術師ギルド所属。専門は抽出・蒸留・乳化・保存処理。研究バカ。アキラの美容・衛生商品を「新しい錬金術分野」と捉える。笑い方「ぐふふ…」。</div>
+          </div>
+          <div class="npc-card">
+            <div class="npc-name">セレナ</div>
+            <div class="npc-sub">ヒューム / 27才 / 商人</div>
+            <div class="npc-body">素性を隠し各地で武者修行中。アキラの商品で世界をとれると確信しており、ある大商会を超えるという野望を胸に秘めている。</div>
+          </div>
+          <div class="npc-card">
+            <div class="npc-name">リゼット＝ヴァルシュ</div>
+            <div class="npc-sub">ヒューム / 24才 / 商会令嬢</div>
+            <div class="npc-body">オーブリン連邦政争接続編で登場予定。距離が近くアキラへ積極的に接近するタイプ。政争編の案内役・商業上層との接続役。エマの感情を揺らす存在。</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- ========== 世界設定 ========== -->
 <div class="pg" id="pg-world">
   <div class="ptitle pt-blue">世界設定</div>
   <div class="wnav">
@@ -502,11 +683,11 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
       <div class="card"><div class="card-t c-bl">デア＝グラント</div><div class="card-b">北半球中央. 東西に長い政治・人口の中心大陸. 中央山脈（グランヴェイル大山脈）が東西を分断. ラムール王国（東）とオーブリン連邦（西）が覇権争い.</div></div>
       <div class="card"><div class="card-t c-am">ツェントルム</div><div class="card-b">西方の南北大陸. 地表は荒野・砂漠だが地下に巨大文明圏. 龍脈が地下空洞を拡張し各地で地下都市を形成. ドワーフ国家が中核.</div></div>
       <div class="card"><div class="card-t c-gr">ルフォレスフューテ</div><div class="card-b">南東の森と山岳大陸. 3/5が大森林、2/5が険しい山岳. エルフのルザリス帝国とビーストのティエン王国が存在. 物語の主舞台.</div></div>
-      <div class="card"><div class="card-t c-rd">魔大陸</div><div class="card-b">南半球の荒廃大陸. 龍脈が地表に剥き出し. 世界最大のダンジョン密集地. ガルス残滓の本拠地候補. 安定した国家は現時点で存在しない.</div></div>
+      <div class="card"><div class="card-t c-rd">魔大陸</div><div class="card-b">南半球の荒廃大陸。龍脈が地表に剥き出し。世界最大のダンジョン密集地。安定した国家は現時点で存在しない。<span class="spoiler-tag sp-heavy">重大ネタバレあり</span><br><small style="color:var(--tm);font-size:11px;">詳細は「ガルス残滓」（用語集）参照</small></div></div>
     </div>
     <div class="sh" style="margin-top:20px;">主要国家</div>
     <div class="grid3">
-      <div class="card"><div class="card-t c-rd">ラムール王国</div><div class="card-b">ヒューム至上主義・奴隷制・精神汚染された王. 冒険者ギルドが撤退済み. デア＝グラント最大の火薬庫.</div></div>
+      <div class="card"><div class="card-t c-rd">ラムール王国</div><div class="card-b">ヒューム至上主義・奴隷制。デア＝グラント最大の火薬庫。<span class="spoiler-tag sp-heavy">重大ネタバレあり</span><br><small style="color:var(--tm);font-size:11px;">詳細は「精神汚染」（用語集）参照</small></div></div>
       <div class="card"><div class="card-t c-bl">オーブリン連邦</div><div class="card-b">多民族連合. 商人・冒険者・ギルドの発言力が強い自由側. 冒険者ギルド本部はここに置く.</div></div>
       <div class="card"><div class="card-t c-gr">ルザリス帝国</div><div class="card-b">エルフの森林帝国. 皇統接続者制度・古代遺跡・魔法文明. 首都レグリス. エマの出身地.</div></div>
       <div class="card"><div class="card-t c-pu">ティエン王国</div><div class="card-b">ビーストの山岳王国. 身体能力と戦士文化. エルフと長い敵対史. 国王は百獣王レレベルガンザ（Sランク）.</div></div>
@@ -550,9 +731,9 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
     <div class="sh" style="margin-top:15px;">ヒト族（希少種）</div>
     <div class="grid3">
       <div class="card"><div class="card-t c-bl">龍人族</div><div class="card-b">伝説的希少. 魔力圧倒的最高. 体内に魔核を持ち核が傷つくと崩壊. 平均寿命1000年とも.</div></div>
-      <div class="card"><div class="card-t c-rd">デーモン</div><div class="card-b">魔大陸生息. ガルス残滓がDNAとして定着した生命体. 最もガルス残滓を収束させた個体が「魔王」となる.</div></div>
+      <div class="card"><div class="card-t c-rd">デーモン</div><div class="card-b">魔大陸生息。<span class="spoiler-tag sp-heavy">重大ネタバレあり</span><br><small style="color:var(--tm);font-size:11px;">詳細は「ガルス残滓」（用語集）参照</small></div></div>
       <div class="card"><div class="card-t c-wh">鬼人族</div><div class="card-b">ルフォレスフューテ最南端. 角・異色の肌. 戦神・死神への信仰. 強く死ぬことを美徳とする文化.</div></div>
-      <div class="card"><div class="card-t c-wh">ハーピー</div><div class="card-b">デア＝グラント険山南方. 背面から翼が生え、腕・手は別に存在. プシュケー商会のみ交易関係を持つ.</div></div>
+      <div class="card"><div class="card-t c-wh">ハーピー</div><div class="card-b">デア＝グラント険山南方。背面から翼が生え、腕・手は別に存在。一部商会とのみ限定的な交易関係を持つ。</div></div>
       <div class="card"><div class="card-t c-bl">マーフォーク</div><div class="card-b">深海・外洋に生息. 腰から下が魚型の尾ひれ. 水属性魔法親和性が高い. ペドラメとの限定的接触あり.</div></div>
       <div class="card"><div class="card-t c-wh">巨人族</div><div class="card-b">ツェントルム中央山間部. 身長3〜4m. 文明は未発達. ドワーフとたまに交流がある極少数種.</div></div>
     </div>
@@ -579,7 +760,7 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
     <div class="sh">注目ダンジョン</div>
     <div class="grid2">
       <div class="card"><div class="card-t c-am">オアシス（ツェントルム）</div><div class="card-b">地下なのに柔らかな光・豊富な水・植生を持つ特殊空間. 龍脈の巨大噴出口. ドワーフ文明の心臓部. 常に資源の恵みと魔物の両方を吐き出す.</div></div>
-      <div class="card"><div class="card-t c-rd">魔大陸全域</div><div class="card-b">世界最大のダンジョン密度. 龍脈が地表に剥き出し. 魔素嵐・異常地形・巨大魔物・変異植生が多い. ガルス残滓の本拠地候補.</div></div>
+      <div class="card"><div class="card-t c-rd">魔大陸全域</div><div class="card-b">世界最大のダンジョン密度。龍脈が地表に剥き出し。魔素嵐・異常地形・巨大魔物・変異植生が多い。<span class="spoiler-tag sp-heavy">重大ネタバレあり</span></div></div>
     </div>
   </div>
 
@@ -598,6 +779,7 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
   </div>
 </div>
 
+<!-- ========== 組織・制度 ========== -->
 <div class="pg" id="pg-org">
   <div class="ptitle pt-teal">組織・制度</div>
   <div class="sw-row">
@@ -652,33 +834,85 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
   </div>
 </div>
 
+<!-- ========== ギャラリー ========== -->
 <div class="pg" id="pg-gallery">
   <div class="ptitle pt-purple">ギャラリー</div>
   <div class="gnav">
     <div class="gbtn act" id="gn-logo" onclick="sg('logo',this)">ロゴ</div>
     <div class="gbtn" id="gn-akira_g" onclick="sg('akira_g',this)">アキラ設定画</div>
     <div class="gbtn" id="gn-ema_g" onclick="sg('ema_g',this)">エマ設定画</div>
+    <div class="gbtn" id="gn-dogran_g" onclick="sg('dogran_g',this)">⚠ 設定画（未登場）</div>
   </div>
-  <div class="gp-pnl show" id="gp-logo"><div class="gal-img"><img src="title_logo.png" alt="タイトルロゴ"></div><div class="gal-cap">タイトルロゴ「幻想科学のプロローグ」— 星・月・歯車・回路が融合したデザイン</div></div>
-  <div class="gp-pnl" id="gp-akira_g"><div class="gal-img"><img src="アキラ.png" alt="アキラ設定画"></div><div class="gal-cap">アキラ＝ジェイ＝ラッシュバック 設定画（Standard Ver.）</div></div>
-  <div class="gp-pnl" id="gp-ema_g"><div class="gal-img"><img src="エマ.png" alt="エマ設定画"></div><div class="gal-cap">エマ＝ロベール（エメリア＝リーン＝ザウ＝フェルグレイス）設定画</div></div>
+  <div class="gp-pnl show" id="gp-logo"><div class="gal-img"><img src="title_logo.png" alt="タイトルロゴ" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap">タイトルロゴ「幻想科学のプロローグ」— 星・月・歯車・回路が融合したデザイン</div><div class="img-hint">🔍 画像をクリックすると拡大表示できます</div></div>
+  <div class="gp-pnl" id="gp-akira_g"><div class="gal-img"><img src="アキラ.png" alt="アキラ設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap">アキラ＝ジェイ＝ラッシュバック 設定画（Standard Ver.）</div><div class="img-hint">🔍 画像をクリックすると拡大表示できます</div></div>
+  <div class="gp-pnl" id="gp-ema_g"><div class="gal-img"><img src="エマ.png" alt="エマ設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap">エマ＝ロベール 設定画</div><div class="img-hint">🔍 画像をクリックすると拡大表示できます</div></div>
+  <div class="gp-pnl" id="gp-dogran_g">
+    <div class="spoiler-block sp-lv1" style="margin-bottom:18px;">
+      <div class="spoiler-toggle" onclick="toggleSpoiler(this.parentElement)">
+        <span><span class="spoiler-toggle-icon">⚠</span>　軽いネタバレ ― 未登場キャラクターの設定画（4名）</span>
+        <span class="spoiler-arrow">▼</span>
+      </div>
+      <div class="spoiler-content">
+        <div class="img-hint" style="text-align:left;margin-bottom:14px;">🔍 各画像をクリックすると拡大表示できます</div>
+        <div class="grid2" style="gap:18px;">
+          <div>
+            <div class="gal-img"><img src="ドグラン.png" alt="ドグラン設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
+            <div class="gal-cap" style="margin-top:8px;">ドグラン 設定画 — 鍛冶師</div>
+          </div>
+          <div>
+            <div class="gal-img"><img src="リファニー.png" alt="リファニー設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
+            <div class="gal-cap" style="margin-top:8px;">リファニー＝キーン 設定画 — 錬金術師</div>
+          </div>
+          <div>
+            <div class="gal-img"><img src="セレナ.png" alt="セレナ設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
+            <div class="gal-cap" style="margin-top:8px;">セレナ 設定画 — 商人</div>
+          </div>
+          <div>
+            <div class="gal-img"><img src="リゼット.png" alt="リゼット設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
+            <div class="gal-cap" style="margin-top:8px;">リゼット＝ヴァルシュ 設定画 — 商会令嬢</div>
+          </div>
+          <div>
+            <div class="gal-img"><img src="アル.png" alt="アル設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
+            <div class="gal-cap" style="margin-top:8px;">アル 設定画 — アキラの相棒</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<!-- 画像モーダル -->
+<div class="modal-overlay" id="modal" onclick="closeModal()">
+  <span class="modal-close" onclick="closeModal()">✕</span>
+  <img class="modal-img" id="modal-img" src="" alt="">
+</div>
+
+<!-- ========== 用語集 ========== -->
 <div class="pg" id="pg-terms">
   <div class="ptitle pt-green">用語集</div>
   <div class="ti"><div class="tn">魔素（マソ）<span class="ttag tr">世界</span></div><div class="td">世界に満ちる根源エネルギー. すべての魔法の触媒. 龍脈として地下を巡り地表環境に影響を与える. 粒子・場・情報媒体・次元間干渉媒体の四つの性質を同時に持つ.</div></div>
   <div class="ti"><div class="tn">龍脈（りゅうみゃく）<span class="ttag tr">世界</span></div><div class="td">地下深くで魔素が巨大な流れとなって循環する惑星規模の魔素循環網. 国や都市の立地にも影響する.</div></div>
   <div class="ti"><div class="tn">術式（ジュツシキ）<span class="ttag tr">魔法</span></div><div class="td">魔素を特定の形に変換するための手順・公式. アキラはプログラムとして捉え理解を深めていく.</div></div>
   <div class="ti"><div class="tn">トランスレイス<span class="ttag tr">魔法</span></div><div class="td">体内にスロット器官を持ちクリスタルを安全に扱える者. 全ヒト族の約1/1000. 覚醒によってランクが上がることがある.</div></div>
-  <div class="ti"><div class="tn">精神汚染<span class="ttag tr">重要</span></div><div class="td">アキラの人格再構成の原因. ラムール王国国王の異常行動の真相でもある. 世界の歪みに深く関わる現象.</div></div>
-  <div class="ti"><div class="tn">ガルス残滓<span class="ttag tr">重要</span></div><div class="td">宇宙歴時代の敵対勢力「ガルス軍」の残骸. 亜人族の体内魔石を媒体として利用し敵対行動を引き起こす.</div></div>
+  <div class="spoiler-block sp-lv2" style="margin-bottom:12px;">
+    <div class="spoiler-toggle" onclick="toggleSpoiler(this.parentElement)">
+      <span><span class="spoiler-toggle-icon">⚠</span>　重大ネタバレあり ― 世界の真相に関わる用語</span>
+      <span class="spoiler-arrow">▼</span>
+    </div>
+    <div class="spoiler-content">
+      <div class="ti" style="margin-bottom:10px;"><div class="tn">精神汚染<span class="ttag tr">重要</span></div><div class="td">アキラの人格再構成の原因。ラムール王国国王の異常行動の真相でもある。世界の歪みに深く関わる現象。</div></div>
+      <div class="ti" style="margin-bottom:0;"><div class="tn">ガルス残滓<span class="ttag tr">重要</span></div><div class="td">宇宙歴時代の敵対勢力「ガルス軍」の残骸。亜人族の体内魔石を媒体として利用し敵対行動を引き起こす。最もガルス残滓を収束させた個体が「魔王」となる。</div></div>
+    </div>
+  </div>
 </div>
 
+<!-- ========== 作品リンク ========== -->
 <div class="pg" id="pg-links">
   <div class="ptitle pt-teal">作品リンク</div>
 <div class="litem"><a href="https://ncode.syosetu.com/n9349dp/" target="_blank" style="text-decoration:none;color:inherit;display:flex;align-items:center;justify-content:space-between;width:100%;"><span class="ln">小説家になろう</span><span class="lnote">→ 読みに行く</span></a></div>
   <div class="litem"><a href="https://kakuyomu.jp/works/2912051598200344740" target="_blank" style="text-decoration:none;color:inherit;display:flex;align-items:center;justify-content:space-between;width:100%;"><span class="ln">カクヨム</span><span class="lnote">→ 読みに行く</span></a></div></div>
 
+<!-- ========== 更新履歴 ========== -->
 <div class="pg" id="pg-updates">
   <div class="ptitle pt-teal">更新履歴</div>
   <div class="ul2">
@@ -745,6 +979,25 @@ function ctab(tid,pid,idx){
   panels.forEach(function(p){p.style.display='none';});
   if(panels[idx])panels[idx].style.display='';
 }
+
+function toggleSpoiler(el){el.classList.toggle('open');}
+
+function openModal(src,alt){
+  document.getElementById('modal-img').src=src;
+  document.getElementById('modal-img').alt=alt;
+  document.getElementById('modal').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('modal').classList.remove('show');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+
+// 句点統一：`.` → `。`（日本語文末のみ）
+document.querySelectorAll('.prose,.card-b,.npc-body,.td,.cdesc').forEach(function(el){
+  el.innerHTML=el.innerHTML.replace(/\. /g,'。').replace(/\.$/g,'。').replace(/\.<br>/g,'。<br>').replace(/\.<\/div>/g,'。</div>');
+});
 </script>
 </body>
 </html>
