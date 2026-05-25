@@ -262,9 +262,12 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
     <div class="dd" id="dd-chara">
       <div class="ddi" onclick="gc('akira');ca();">アキラ</div>
       <div class="ddi" onclick="gc('ema');ca();">エマ</div>
+      <div class="ddi" onclick="gc('al');ca();">アル</div>
+      <div class="dd-sep"></div>
+      <div class="ddi" onclick="gc('guiding');ca();">導きの輪環</div>
       <div class="dd-sep"></div>
       <div class="ddi" onclick="gc('party');ca();">序盤パーティ</div>
-      <div class="ddi" onclick="gc('guild_party');ca();">導きの輪環</div>
+      <div class="ddi" onclick="gc('luke');ca();">ルーク</div>
       <div class="ddi" onclick="gc('npc');ca();">その他NPC</div>
     </div>
   </div>
@@ -291,6 +294,10 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
       <div class="ddi" onclick="gg('logo');ca();">ロゴ</div>
       <div class="ddi" onclick="gg('akira_g');ca();">アキラ設定画</div>
       <div class="ddi" onclick="gg('ema_g');ca();">エマ設定画</div>
+      <div class="ddi" onclick="gg('al_g');ca();">アル設定画</div>
+      <div class="ddi" onclick="gg('luke_g');ca();">ルーク設定画</div>
+      <div class="ddi" onclick="gg('guiding_g');ca();">導きの輪環</div>
+      <div class="ddi" onclick="gg('dogran_g');ca();">⚠ 未登場（ネタバレ）</div>
       <div class="dd-sep"></div>
       <div class="ddi dim">装備・魔法（準備中）</div>
       <div class="ddi dim">地図（準備中）</div>
@@ -385,8 +392,10 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
   <div class="sw-row">
     <div class="sw-btn act" id="csw-akira" onclick="sc('akira',this)">アキラ</div>
     <div class="sw-btn" id="csw-ema" onclick="sc('ema',this)">エマ</div>
+    <div class="sw-btn" id="csw-al" onclick="sc('al',this)">アル</div>
+    <div class="sw-btn" id="csw-guiding" onclick="sc('guiding',this)">導きの輪環</div>
     <div class="sw-btn" id="csw-party" onclick="sc('party',this)">序盤パーティ</div>
-    <div class="sw-btn" id="csw-guild_party" onclick="sc('guild_party',this)">導きの輪環</div>
+    <div class="sw-btn" id="csw-luke" onclick="sc('luke',this)">ルーク</div>
     <div class="sw-btn" id="csw-npc" onclick="sc('npc',this)">その他NPC</div>
   </div>
 
@@ -508,18 +517,54 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
     </div>
   </div>
 
+  <!-- アル -->
   <div id="cv-al" style="display:none">
-    <div class="spoiler-block sp-lv2" style="max-width:520px;margin-bottom:16px;">
-      <div class="spoiler-toggle" onclick="toggleSpoiler(this.parentElement)">
-        <span><span class="spoiler-toggle-icon">⚠</span>　重大ネタバレあり ― アル（第33話以降の設定）</span>
-        <span class="spoiler-arrow">▼</span>
+    <div class="tabs" id="alt">
+      <div class="tab act" onclick="ctab('alt','alp',0)">プロフィール</div>
+      <div class="tab" onclick="ctab('alt','alp',1)">詳細設定</div>
+    </div>
+    <div id="alp">
+      <div>
+        <div class="cmain">
+          <div class="cimg"><img src="アル.png" alt="アル" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
+          <div class="cinfo">
+            <div class="cname">アル</div>
+            <div class="cfn">アキラに搭載された中核AI。対外的には特殊な精霊として認識されている。</div>
+            <div class="tags"><span class="tag tb">AI</span><span class="tag tw">精霊偽装</span><span class="tag tg">性別なし</span></div>
+            <div class="cstat">
+              <div class="sr"><span class="sk">外見サイズ</span><span class="sv">15〜25cm程度</span></div>
+              <div class="sr"><span class="sk">外見</span><span class="sv">半透明の光の精霊（ナノマシン投影）</span></div>
+              <div class="sr"><span class="sk">発話</span><span class="sv">『　』（アキラのみ聞こえる）</span></div>
+              <div class="sr"><span class="sk">性別</span><span class="sv">なし（中性的な外見）</span></div>
+              <div class="sr"><span class="sk">口調</span><span class="sv">断定と推定を分ける。簡潔・分析的</span></div>
+            </div>
+            <div class="cdesc">道具以上、人格未満。アキラの脳・身体・ナノマシン・情報処理すべてを支える第二の脳。無機質だが面倒見がよく、保護者めいた動きをする。冗談は言わないが、返答がかえってシュールになることがある。</div>
+          </div>
+        </div>
+        <div class="sh">能力・役割</div>
+        <div class="grid2">
+          <div class="card"><div class="card-t c-bl">戦闘補助</div><div class="card-b">状況分析・行動最適化・ナノマシン制御による実戦支援。</div></div>
+          <div class="card"><div class="card-t c-bl">記憶・言語補正</div><div class="card-b">アキラの欠落した記憶の修復と現地語への即時対応。</div></div>
+          <div class="card"><div class="card-t c-gr">研究・解析</div><div class="card-b">魔法体系・遺跡・素材・未知技術の解析と研究支援。</div></div>
+          <div class="card"><div class="card-t c-gr">ラボ管理</div><div class="card-b">ラボ・ファクトリー構築、生産管理、品質分析など。</div></div>
+        </div>
+        <div class="sh">アキラ目線での見え方</div>
+        <div class="prose">最初から頼れる存在。ときに相棒、ときに保護者、ときに自分以上に自分を把握している存在。欠落を補い、同時に自分を越えうる可能性を持つ。</div>
       </div>
-      <div class="spoiler-content">
-        <div class="npc-card" style="border:none;padding:0;box-shadow:none;">
-          <div class="npc-name">アル（ジェイク搭載AI）</div>
-          <div class="npc-sub">アキラに搭載されたAI。対外的偽装名あり</div>
-          <div class="tags" style="margin-top:10px;"><span class="tag tb">AI</span><span class="tag tw">第二の脳</span><span class="tag tg">中核補助存在</span></div>
-          <div class="npc-body" style="margin-top:10px;font-size:14px;">アキラの脳・身体・ナノマシン・装備・情報処理を支える中核AI。記憶修復、言語補正、戦闘補助、研究再開、ラボ・ファクトリー構築、魔法・遺跡解析まで役割は広い。<br><br>発話は『　』。常に冷静・正確・簡潔。道具以上・人格未満。無機質だが面倒見はよく、保護者めいた動きをする。冗談は言わないが返答がシュールになることがある。<br><br>対外的にはナノマシン投影によって小型の光の精霊のような外見を演出できる（エマには共有済み）。</div>
+      <div style="display:none">
+        <div class="sh">精霊としての外見（ナノマシン投影）</div>
+        <div class="prose">銀・淡青・青白の光で構成された小さな存在。眼は回路状の光。翼は半透明で回路模様入り。銀のナノ粒子が常に周囲を漂い環境を制御している。</div>
+        <div class="sh">サブフォーム</div>
+        <div class="grid2">
+          <div class="card"><div class="card-t c-bl">銀鳥形態</div><div class="card-b">光とナノ粒子で構成された小さな銀の鳥。対外的に見せる精霊の姿。目が淡い青白色に光る。</div></div>
+          <div class="card"><div class="card-t c-bl">群体形態</div><div class="card-b">無数の銀色の光が集合して巨大な生物の輪郭を形成。鳥・鯨などの形を模倣し、都市全体に拡散することも可能。</div></div>
+        </div>
+        <div class="sh">場への作用</div>
+        <div class="grid2">
+          <div class="card"><div class="card-t c-pu">情報密度</div><div class="card-b">登場するだけで情報の密度と精度が上がる。</div></div>
+          <div class="card"><div class="card-t c-pu">緊張演出</div><div class="card-b">戦闘・研究シーンで一気に空気を引き締める。</div></div>
+          <div class="card"><div class="card-t c-gr">コメディ</div><div class="card-b">真面目すぎる返答が結果的にシュールさを生む。</div></div>
+          <div class="card"><div class="card-t c-te">成長余地</div><div class="card-b">物語が進むほど「新しい知性」に近づいていく余地がある。</div></div>
         </div>
       </div>
     </div>
@@ -569,42 +614,176 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
     </div>
   </div>
 
-  <div id="cv-guild_party" style="display:none">
-    <div class="spoiler-block sp-lv1">
-      <div class="spoiler-toggle" onclick="toggleSpoiler(this.parentElement)">
-        <span><span class="spoiler-toggle-icon">⚠</span>　軽いネタバレ ― Aランクパーティ「導きの輪環」（未登場）</span>
-        <span class="spoiler-arrow">▼</span>
+  <!-- 導きの輪環 -->
+  <div id="cv-guiding" style="display:none">
+    <div class="ptitle pt-blue" style="font-size:16px;margin-bottom:16px;">Aランクパーティ「導きの輪環」</div>
+    <div class="prose" style="margin-bottom:20px;">この大陸でも上位に入るAランクパーティ。名前だけで場の空気が変わる「上の世界」の象徴。エメルネスト廃坑の異常湧き対応で招集される。実力・統率・経験が高次元でまとまっており、一人ひとりの個性は強いが全体として崩れない。</div>
+    <div class="tabs" id="guidingt">
+      <div class="tab act" onclick="ctab('guidingt','guidingp',0)">リブ</div>
+      <div class="tab" onclick="ctab('guidingt','guidingp',1)">マルス</div>
+      <div class="tab" onclick="ctab('guidingt','guidingp',2)">ゾゾル</div>
+      <div class="tab" onclick="ctab('guidingt','guidingp',3)">ララレア</div>
+      <div class="tab" onclick="ctab('guidingt','guidingp',4)">リア</div>
+    </div>
+    <div id="guidingp">
+      <!-- リブ -->
+      <div>
+        <div class="cmain">
+          <div class="cimg"><img src="リブ.png" alt="リブ設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
+          <div class="cinfo">
+            <div class="cname">リブ＝マクスウェル</div>
+            <div class="cfn">導きの輪環リーダー</div>
+            <div class="tags"><span class="tag tw">ヒューム</span><span class="tag tb">Aランク</span><span class="tag tr">斥候（偽装）</span></div>
+            <div class="cstat">
+              <div class="sr"><span class="sk">年齢</span><span class="sv">38才</span></div>
+              <div class="sr"><span class="sk">身長/体重</span><span class="sv">176cm / 69kg</span></div>
+              <div class="sr"><span class="sk">一人称</span><span class="sv">俺</span></div>
+              <div class="sr"><span class="sk">二人称</span><span class="sv">あんた・てめぇ</span></div>
+            </div>
+            <div class="cdesc">軽口を叩き場を軽くするが、目だけは笑っていない。緊張を散らしながら状況をかなり細かく見ている。本気になると一気に温度が変わる。</div>
+            <div class="sr" style="margin-top:8px;"><span class="sk">口癖</span><span class="sv">「おいおい、しけた面してやがんな。もっと楽しくやろうぜ」</span></div>
+          </div>
+        </div>
+        <div class="spoiler-block sp-lv2" style="margin-top:16px;">
+          <div class="spoiler-toggle" onclick="toggleSpoiler(this.parentElement)">
+            <span><span class="spoiler-toggle-icon">⚠</span>　重大ネタバレ ― 真の役割</span>
+            <span class="spoiler-arrow">▼</span>
+          </div>
+          <div class="spoiler-content">
+            <div class="prose">実際のジョブはアサシン。キマイラヘッド暗殺部隊「蛇の頭」の統括。妹リアの件をきっかけに暗殺者として覚醒し、汚れ仕事を引き受ける覚悟を持つ。</div>
+          </div>
+        </div>
       </div>
-      <div class="spoiler-content">
-        <div class="sh">Aランクパーティ「導きの輪環」</div>
-        <div class="prose">この大陸でも上位に入るAランクパーティ。名前だけで場の空気が変わる「上の世界」の象徴。エメルネスト廃坑の異常湧き対応で招集される。</div>
-        <div class="npc-grid">
-      <div class="npc-card">
-        <div class="npc-name">リブ＝マクスウェル</div>
-        <div class="npc-sub">ヒューム / Aランク / 38才 / リーダー</div>
-        <div class="npc-body">表向きは斥候. 実際はアサシン. 一人称「俺」. 軽く見せるが内実は鋭いリーダー. 緊張を散らしつつ状況を細かく見ている.<br><span style="color:var(--navy);font-size:12px;font-style:italic;">「おいおい、しけた面してやがんな. もっと楽しくやろうぜ」</span></div>
+      <!-- マルス -->
+      <div style="display:none">
+        <div class="cmain">
+          <div class="cimg"><img src="マルス.png" alt="マルス設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
+          <div class="cinfo">
+            <div class="cname">マルス＝アルトライア</div>
+            <div class="cfn">導きの輪環メンバー（新参）</div>
+            <div class="tags"><span class="tag tw">ヒューム</span><span class="tag tb">Bランク</span><span class="tag tg">前衛・剣士</span></div>
+            <div class="cstat">
+              <div class="sr"><span class="sk">年齢</span><span class="sv">32才</span></div>
+              <div class="sr"><span class="sk">身長/体重</span><span class="sv">188cm / 77kg</span></div>
+              <div class="sr"><span class="sk">一人称</span><span class="sv">僕</span></div>
+              <div class="sr"><span class="sk">二人称</span><span class="sv">君</span></div>
+              <div class="sr"><span class="sk">武器</span><span class="sv">細身の長剣</span></div>
+            </div>
+            <div class="cdesc">柔らかく穏やかだが、剣士としての芯は強い。パーティの中間役・柔軟剤。優男に見えるが戦闘時は一気に空気が変わる。育ちの良さが隠しきれていない。</div>
+            <div class="sr" style="margin-top:8px;"><span class="sk">口癖</span><span class="sv">「ごめんね、みんな賑やかで」</span></div>
+          </div>
+        </div>
+        <div class="spoiler-block sp-lv2" style="margin-top:16px;">
+          <div class="spoiler-toggle" onclick="toggleSpoiler(this.parentElement)">
+            <span><span class="spoiler-toggle-icon">⚠</span>　重大ネタバレ ― 真の素性</span>
+            <span class="spoiler-arrow">▼</span>
+          </div>
+          <div class="spoiler-content">
+            <div class="prose">本名：マルルークス＝ヴァン＝ラムール。ラムール王国の第一王子。キマイラヘッド「獅子の頭」。弟はエニルカラコス＝ヴァン＝ラムール。</div>
+          </div>
+        </div>
       </div>
-      <div class="npc-card">
-        <div class="npc-name">マルス＝アルトライア</div>
-        <div class="npc-sub">ヒューム / Bランク / 32才 / 前衛</div>
-        <div class="npc-body">ジョブはソードマスター. パーティの新参者. 一人称「僕」. 柔らかく穏やかだが剣士としての芯は強い. パーティの柔軟剤的存在.<br><span style="color:var(--navy);font-size:12px;font-style:italic;">「ごめんね、みんな賑やかで」</span></div>
+      <!-- ゾゾル -->
+      <div style="display:none">
+        <div class="cmain">
+          <div class="cimg"><img src="ゾゾル.png" alt="ゾゾル設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
+          <div class="cinfo">
+            <div class="cname">ゾゾル</div>
+            <div class="cfn">導きの輪環メンバー</div>
+            <div class="tags"><span class="tag ty">ドワーフ</span><span class="tag tb">Aランク</span><span class="tag tw">重騎士・盾</span></div>
+            <div class="cstat">
+              <div class="sr"><span class="sk">年齢</span><span class="sv">65才</span></div>
+              <div class="sr"><span class="sk">身長/体重</span><span class="sv">143cm / 115kg</span></div>
+              <div class="sr"><span class="sk">一人称</span><span class="sv">ワシ</span></div>
+              <div class="sr"><span class="sk">二人称</span><span class="sv">おぬし・小僧</span></div>
+              <div class="sr"><span class="sk">武器</span><span class="sv">大盾・片手槌</span></div>
+            </div>
+            <div class="cdesc">小柄だが密度が異常に高く、そこに立っているだけで壁のように見える。守りへの誇りが強く、素材・金属の話になると別方向に熱くなる。</div>
+            <div class="sr" style="margin-top:8px;"><span class="sk">口癖</span><span class="sv">「ワシの鉄壁、抜けるもんなら抜いてみろい！」</span></div>
+          </div>
+        </div>
       </div>
-      <div class="npc-card">
-        <div class="npc-name">ゾゾル</div>
-        <div class="npc-sub">ドワーフ / Aランク / 65才 / 重騎士</div>
-        <div class="npc-body">盾職. 一人称「ワシ」. 豪放で装備と守りへの誇りが非常に強い. 素材や金属の価値にも敏感.<br><span style="color:var(--navy);font-size:12px;font-style:italic;">「小僧、これはヒヒイロカネじゃぞ！」</span></div>
+      <!-- ララレア -->
+      <div style="display:none">
+        <div class="cmain">
+          <div class="cimg"><img src="ララレア.png" alt="ララレア設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
+          <div class="cinfo">
+            <div class="cname">ララレア＝リトリ</div>
+            <div class="cfn">導きの輪環メンバー</div>
+            <div class="tags"><span class="tag tg">小人族</span><span class="tag tb">Bランク</span><span class="tag tg">ヒーラー</span></div>
+            <div class="cstat">
+              <div class="sr"><span class="sk">年齢</span><span class="sv">24才</span></div>
+              <div class="sr"><span class="sk">身長/体重</span><span class="sv">108cm / 21kg</span></div>
+              <div class="sr"><span class="sk">一人称</span><span class="sv">ウチ</span></div>
+              <div class="sr"><span class="sk">二人称</span><span class="sv">きみ・おにーさん</span></div>
+              <div class="sr"><span class="sk">武器</span><span class="sv">小杖・支援魔法</span></div>
+            </div>
+            <div class="cdesc">小柄で明るく小悪魔的だが、戦場では命を繋ぐ大人のヒーラー。回復役としての責任感を持つ。「こー見えて、ウチ、大人の女なんさ！」</div>
+          </div>
+        </div>
       </div>
-      <div class="npc-card">
-        <div class="npc-name">ララレア＝リトリ</div>
-        <div class="npc-sub">小人族 / Bランク / 24才 / ヒーラー</div>
-        <div class="npc-body">身長108cm. 気さくで独特なしゃべり方. 一人称「ウチ」. 明るく砕けているが回復役としての責任感はある.<br><span style="color:var(--navy);font-size:12px;font-style:italic;">「こー見えて、ウチ、大人の女なんさ！」</span></div>
-      </div>
-      <div class="npc-card">
-        <div class="npc-name">リア＝マクスウェル</div>
-        <div class="npc-sub">ヒューム / Bランク / 30才 / ソーサラー</div>
-        <div class="npc-body">リブの妹. 一人称「私」. 冷静で理性的. 兄の軽さに振り回されつつパーティの理性側を支える. まず人を観察してから判断するタイプ.<br><span style="color:var(--navy);font-size:12px;font-style:italic;">「あ、兄がいつもすみません…」</span></div>
+      <!-- リア -->
+      <div style="display:none">
+        <div class="cmain">
+          <div class="cimg"><img src="リア.png" alt="リア設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
+          <div class="cinfo">
+            <div class="cname">リア＝マクスウェル</div>
+            <div class="cfn">導きの輪環メンバー / リブの妹</div>
+            <div class="tags"><span class="tag tw">ヒューム</span><span class="tag tp">Bランク</span><span class="tag tp">ソーサラー</span></div>
+            <div class="cstat">
+              <div class="sr"><span class="sk">年齢</span><span class="sv">30才</span></div>
+              <div class="sr"><span class="sk">身長/体重</span><span class="sv">158cm / 43kg</span></div>
+              <div class="sr"><span class="sk">一人称</span><span class="sv">私</span></div>
+              <div class="sr"><span class="sk">二人称</span><span class="sv">あなた</span></div>
+              <div class="sr"><span class="sk">武器</span><span class="sv">ソーサラー杖・魔導書</span></div>
+            </div>
+            <div class="cdesc">静かで儚げだが、内側にラムールへの深い憎しみを抱えた魔術師。兄リブの軽さを抑える理性側として機能する。物腰は柔らかいが纏う魔力は重い。</div>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+
+  <!-- ルーク -->
+  <div id="cv-luke" style="display:none">
+    <div class="tabs" id="lukt">
+      <div class="tab act" onclick="ctab('lukt','lukp',0)">プロフィール</div>
+      <div class="tab" onclick="ctab('lukt','lukp',1)">龍化形態</div>
+    </div>
+    <div id="lukp">
+      <div>
+        <div class="cmain">
+          <div class="cimg"><img src="ルーク_ルザリス.png" alt="ルーク設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
+          <div class="cinfo">
+            <div class="cname">ルーク＝ファラコル＝ザウ＝ルザリス</div>
+            <div class="cfn">ルザリス帝国第五代皇帝 / 白龍の担い手</div>
+            <div class="tags"><span class="tag tg">エルフ</span><span class="tag ty">皇帝</span><span class="tag tp">龍化能力者</span></div>
+            <div class="cstat">
+              <div class="sr"><span class="sk">年齢</span><span class="sv">324才</span></div>
+              <div class="sr"><span class="sk">身長</span><span class="sv">189cm</span></div>
+              <div class="sr"><span class="sk">パンドラクリスタル</span><span class="sv">白龍のクリスタル</span></div>
+              <div class="sr"><span class="sk">特技</span><span class="sv">龍化・高密度魔法</span></div>
+              <div class="sr"><span class="sk">瞳（通常）</span><span class="sv">エメラルドグリーン</span></div>
+              <div class="sr"><span class="sk">瞳（魔力解放時）</span><span class="sv">金の光</span></div>
+            </div>
+            <div class="cdesc">国家を滅ぼせる力を持ちながら、それを軽々しく振るわない。国は土地ではなく民だという信念を持つ。気さくで芝居っ気があり、圧倒的強者でありながら素の自分でいたい欲求も強い。</div>
+          </div>
+        </div>
+        <div class="sh">役割</div>
+        <div class="grid2">
+          <div class="card"><div class="card-t c-pu">国家権力の象徴</div><div class="card-b">ルザリス帝国の絶対的頂点。その存在だけで世界の格を示す。</div></div>
+          <div class="card"><div class="card-t c-bl">導き手</div><div class="card-b">序盤におけるアキラにとっての「話の通じる上位権力者」。古代遺跡・転移の謎にも関わる。</div></div>
+          <div class="card"><div class="card-t c-gr">友人関係</div><div class="card-b">イアン、レイナードとは古い友人。皇帝でありながら「人として見てくれる相手」を大切にする。</div></div>
+          <div class="card"><div class="card-t c-am">底知れぬ強者</div><div class="card-b">フランクに見えても、圧倒的強者としての底知れなさは常に滲む。</div></div>
+        </div>
+      </div>
+      <div style="display:none">
+        <div class="sh">小形態（約5mクラス）</div>
+        <div class="prose">俊敏性と速応性に優れたコンパクトな龍化形態。全長5〜6m、翼開長8〜10m。高密度の魔力体・身体能力強化・飛行能力・偵察と急速展開に適した形態。</div>
+        <div class="sh">大形態（200m超クラス）</div>
+        <div class="prose">白龍の真の姿。破滅をもたらす災害そのもの。全長200m以上、翼開長300m以上。壊滅的な魔法出力・圧倒的な物理力・広域破壊能力・自然災害に匹敵する魔力放出。「災害」の体現。</div>
+        <div class="sh">真剣になった時</div>
+        <div class="prose">真剣になると空気そのものが変わる。その存在感だけで周囲を圧倒し黙らせる。生き物としての格の差が本能的に伝わる。</div>
       </div>
     </div>
   </div>
@@ -839,42 +1018,48 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
   <div class="ptitle pt-purple">ギャラリー</div>
   <div class="gnav">
     <div class="gbtn act" id="gn-logo" onclick="sg('logo',this)">ロゴ</div>
-    <div class="gbtn" id="gn-akira_g" onclick="sg('akira_g',this)">アキラ設定画</div>
-    <div class="gbtn" id="gn-ema_g" onclick="sg('ema_g',this)">エマ設定画</div>
-    <div class="gbtn" id="gn-dogran_g" onclick="sg('dogran_g',this)">⚠ 設定画（未登場）</div>
+    <div class="gbtn" id="gn-akira_g" onclick="sg('akira_g',this)">アキラ</div>
+    <div class="gbtn" id="gn-ema_g" onclick="sg('ema_g',this)">エマ</div>
+    <div class="gbtn" id="gn-al_g" onclick="sg('al_g',this)">アル</div>
+    <div class="gbtn" id="gn-luke_g" onclick="sg('luke_g',this)">ルーク</div>
+    <div class="gbtn" id="gn-guiding_g" onclick="sg('guiding_g',this)">導きの輪環</div>
+    <div class="gbtn" id="gn-dogran_g" onclick="sg('dogran_g',this)">⚠ 設定画（未登場・ネタバレ）</div>
   </div>
+
   <div class="gp-pnl show" id="gp-logo"><div class="gal-img"><img src="title_logo.png" alt="タイトルロゴ" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap">タイトルロゴ「幻想科学のプロローグ」— 星・月・歯車・回路が融合したデザイン</div><div class="img-hint">🔍 画像をクリックすると拡大表示できます</div></div>
+
   <div class="gp-pnl" id="gp-akira_g"><div class="gal-img"><img src="アキラ.png" alt="アキラ設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap">アキラ＝ジェイ＝ラッシュバック 設定画（Standard Ver.）</div><div class="img-hint">🔍 画像をクリックすると拡大表示できます</div></div>
+
   <div class="gp-pnl" id="gp-ema_g"><div class="gal-img"><img src="エマ.png" alt="エマ設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap">エマ＝ロベール 設定画</div><div class="img-hint">🔍 画像をクリックすると拡大表示できます</div></div>
+
+  <div class="gp-pnl" id="gp-al_g"><div class="gal-img"><img src="アル.png" alt="アル設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap">アル 設定画 — アキラに搭載された中核AI。精霊として偽装可能。</div><div class="img-hint">🔍 画像をクリックすると拡大表示できます</div></div>
+
+  <div class="gp-pnl" id="gp-luke_g"><div class="gal-img"><img src="ルーク_ルザリス.png" alt="ルーク設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap">ルーク＝ファラコル＝ザウ＝ルザリス 設定画 — ルザリス帝国第五代皇帝</div><div class="img-hint">🔍 画像をクリックすると拡大表示できます</div></div>
+
+  <div class="gp-pnl" id="gp-guiding_g">
+    <div class="img-hint" style="text-align:left;margin-bottom:14px;">🔍 各画像をクリックすると拡大表示できます</div>
+    <div class="grid2" style="gap:18px;">
+      <div><div class="gal-img"><img src="リブ.png" alt="リブ設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">リブ＝マクスウェル — リーダー</div></div>
+      <div><div class="gal-img"><img src="マルス.png" alt="マルス設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">マルス＝アルトライア — 剣士</div></div>
+      <div><div class="gal-img"><img src="ゾゾル.png" alt="ゾゾル設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">ゾゾル — 重騎士</div></div>
+      <div><div class="gal-img"><img src="ララレア.png" alt="ララレア設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">ララレア＝リトリ — ヒーラー</div></div>
+      <div><div class="gal-img"><img src="リア.png" alt="リア設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">リア＝マクスウェル — ソーサラー</div></div>
+    </div>
+  </div>
+
   <div class="gp-pnl" id="gp-dogran_g">
     <div class="spoiler-block sp-lv1" style="margin-bottom:18px;">
       <div class="spoiler-toggle" onclick="toggleSpoiler(this.parentElement)">
-        <span><span class="spoiler-toggle-icon">⚠</span>　軽いネタバレ ― 未登場キャラクターの設定画（4名）</span>
+        <span><span class="spoiler-toggle-icon">⚠</span>　ネタバレあり ― 今後登場予定キャラクターの設定画</span>
         <span class="spoiler-arrow">▼</span>
       </div>
       <div class="spoiler-content">
         <div class="img-hint" style="text-align:left;margin-bottom:14px;">🔍 各画像をクリックすると拡大表示できます</div>
         <div class="grid2" style="gap:18px;">
-          <div>
-            <div class="gal-img"><img src="ドグラン.png" alt="ドグラン設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
-            <div class="gal-cap" style="margin-top:8px;">ドグラン 設定画 — 鍛冶師</div>
-          </div>
-          <div>
-            <div class="gal-img"><img src="リファニー.png" alt="リファニー設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
-            <div class="gal-cap" style="margin-top:8px;">リファニー＝キーン 設定画 — 錬金術師</div>
-          </div>
-          <div>
-            <div class="gal-img"><img src="セレナ.png" alt="セレナ設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
-            <div class="gal-cap" style="margin-top:8px;">セレナ 設定画 — 商人</div>
-          </div>
-          <div>
-            <div class="gal-img"><img src="リゼット.png" alt="リゼット設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
-            <div class="gal-cap" style="margin-top:8px;">リゼット＝ヴァルシュ 設定画 — 商会令嬢</div>
-          </div>
-          <div>
-            <div class="gal-img"><img src="アル.png" alt="アル設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div>
-            <div class="gal-cap" style="margin-top:8px;">アル 設定画 — アキラの相棒</div>
-          </div>
+          <div><div class="gal-img"><img src="ドグラン.png" alt="ドグラン設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">ドグラン — 鍛冶師</div></div>
+          <div><div class="gal-img"><img src="リファニー.png" alt="リファニー設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">リファニー＝キーン — 錬金術師</div></div>
+          <div><div class="gal-img"><img src="セレナ.png" alt="セレナ設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">セレナ — 商人</div></div>
+          <div><div class="gal-img"><img src="リゼット.png" alt="リゼット設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">リゼット＝ヴァルシュ — 商会令嬢</div></div>
         </div>
       </div>
     </div>
