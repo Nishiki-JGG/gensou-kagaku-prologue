@@ -196,6 +196,8 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
 .read-btn-n:hover{background:#0080c0;}
 .read-btn-k{background:#3ac;color:#fff;border:2px solid #2a9a99;}
 .read-btn-k:hover{background:#2a9a99;}
+.read-btn-a{background:#ff7a00;color:#fff;border:2px solid #d96400;}
+.read-btn-a:hover{background:#d96400;}
 
 /* ネタバレバッジ */
 .spoiler-tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px;margin-left:8px;vertical-align:middle;}
@@ -268,6 +270,7 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
       <div class="dd-sep"></div>
       <div class="ddi" onclick="gc('party');ca();">序盤パーティ</div>
       <div class="ddi" onclick="gc('luke');ca();">ルーク</div>
+      <div class="ddi" onclick="gc('atelier');ca();">精霊工房</div>
       <div class="ddi" onclick="gc('npc');ca();">その他NPC</div>
     </div>
   </div>
@@ -297,7 +300,8 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
       <div class="ddi" onclick="gg('al_g');ca();">アル設定画</div>
       <div class="ddi" onclick="gg('luke_g');ca();">ルーク設定画</div>
       <div class="ddi" onclick="gg('guiding_g');ca();">導きの輪環</div>
-      <div class="ddi" onclick="gg('dogran_g');ca();">⚠ 未登場（ネタバレ）</div>
+      <div class="ddi" onclick="gg('illust_g');ca();">本編挿絵</div>
+      <div class="ddi" onclick="gg('dogran_g');ca();">サブキャラクター</div>
       <div class="dd-sep"></div>
       <div class="ddi dim">装備・魔法（準備中）</div>
       <div class="ddi dim">地図（準備中）</div>
@@ -335,6 +339,7 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
     <div class="read-btns">
       <a href="https://ncode.syosetu.com/n9349dp/" target="_blank" rel="noopener" class="read-btn read-btn-n">小説家になろうで読む</a>
       <a href="https://kakuyomu.jp/works/2912051598200344740" target="_blank" rel="noopener" class="read-btn read-btn-k">カクヨムで読む</a>
+      <a href="https://www.alphapolis.co.jp/novel/958366493/613061815" target="_blank" rel="noopener" class="read-btn read-btn-a">アルファポリスで読む（挿絵あり）</a>
     </div>
   </div>
   <div class="top-grid">
@@ -365,6 +370,7 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
     <div class="read-btns" style="justify-content:flex-start;margin-top:20px;">
       <a href="https://ncode.syosetu.com/n9349dp/" target="_blank" rel="noopener" class="read-btn read-btn-n">小説家になろうで読む</a>
       <a href="https://kakuyomu.jp/works/2912051598200344740" target="_blank" rel="noopener" class="read-btn read-btn-k">カクヨムで読む</a>
+      <a href="https://www.alphapolis.co.jp/novel/958366493/613061815" target="_blank" rel="noopener" class="read-btn read-btn-a">アルファポリスで読む（挿絵あり）</a>
     </div>
   </div>
   <div class="ptitle pt-red" style="margin-top:10px;">ネタバレについて</div>
@@ -396,6 +402,7 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
     <div class="sw-btn" id="csw-guiding" onclick="sc('guiding',this)">導きの輪環</div>
     <div class="sw-btn" id="csw-party" onclick="sc('party',this)">序盤パーティ</div>
     <div class="sw-btn" id="csw-luke" onclick="sc('luke',this)">ルーク</div>
+    <div class="sw-btn" id="csw-atelier" onclick="sc('atelier',this)">精霊工房</div>
     <div class="sw-btn" id="csw-npc" onclick="sc('npc',this)">その他NPC</div>
   </div>
 
@@ -812,34 +819,36 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
         <div class="npc-body">季節の野菜を気安く勧め、エマにおまけをつける軽口役. 市場に馴染んできた二人を象徴する存在. 日常の生活感を出す.</div>
       </div>
     </div>
-    <div class="spoiler-block sp-lv1" style="margin-top:20px;">
-      <div class="spoiler-toggle" onclick="toggleSpoiler(this.parentElement)">
-        <span><span class="spoiler-toggle-icon">⚠</span>　軽いネタバレ ― 今後登場予定キャラクター</span>
-        <span class="spoiler-arrow">▼</span>
+  </div>
+
+  <!-- 精霊工房 -->
+  <div id="cv-atelier" style="display:none">
+    <div class="sh">精霊工房の仲間たち</div>
+    <div class="prose" style="margin-bottom:18px;">アキラの技術や商品開発を支える、職人・研究者・商人たち。それぞれ異なる立場からアキラと関わりを持つ。</div>
+    <div class="npc-grid">
+      <div class="npc-card">
+        <div class="cimg" style="margin-bottom:10px;"><img src="ドグラン.png" alt="ドグラン設定画" class="img-clickable" onclick="openModal(this.src,this.alt)" style="width:100%;border-radius:6px;"></div>
+        <div class="npc-name">ドグラン</div>
+        <div class="npc-sub">ドワーフ / 82才 / 鍛冶職人</div>
+        <div class="npc-body">工房『アズベルトの槌』。偏屈で頑固な鍛冶師。未知の金属・技術にテンションが爆上がりする職人気質。一人称「ワシ」。アキラ側専属鍛冶師候補。</div>
       </div>
-      <div class="spoiler-content">
-        <div class="npc-grid">
-          <div class="npc-card">
-            <div class="npc-name">ドグラン</div>
-            <div class="npc-sub">ドワーフ / 82才 / 鍛冶職人</div>
-            <div class="npc-body">工房『アズベルトの槌』。偏屈で頑固な鍛冶師。未知の金属・技術にテンションが爆上がりする職人気質。一人称「ワシ」。後のアキラ側専属鍛冶師候補。</div>
-          </div>
-          <div class="npc-card">
-            <div class="npc-name">リファニー＝キーン</div>
-            <div class="npc-sub">小人族 / 25才前後 / 錬金術師</div>
-            <div class="npc-body">セージグリーンの髪。ヴェルクハーフェン錬金術師ギルド所属。専門は抽出・蒸留・乳化・保存処理。研究バカ。アキラの美容・衛生商品を「新しい錬金術分野」と捉える。笑い方「ぐふふ…」。</div>
-          </div>
-          <div class="npc-card">
-            <div class="npc-name">セレナ</div>
-            <div class="npc-sub">ヒューム / 27才 / 商人</div>
-            <div class="npc-body">素性を隠し各地で武者修行中。アキラの商品で世界をとれると確信しており、ある大商会を超えるという野望を胸に秘めている。</div>
-          </div>
-          <div class="npc-card">
-            <div class="npc-name">リゼット＝ヴァルシュ</div>
-            <div class="npc-sub">ヒューム / 24才 / 商会令嬢</div>
-            <div class="npc-body">オーブリン連邦政争接続編で登場予定。距離が近くアキラへ積極的に接近するタイプ。政争編の案内役・商業上層との接続役。エマの感情を揺らす存在。</div>
-          </div>
-        </div>
+      <div class="npc-card">
+        <div class="cimg" style="margin-bottom:10px;"><img src="リファニー.png" alt="リファニー設定画" class="img-clickable" onclick="openModal(this.src,this.alt)" style="width:100%;border-radius:6px;"></div>
+        <div class="npc-name">リファニー＝キーン</div>
+        <div class="npc-sub">小人族 / 25才前後 / 錬金術師</div>
+        <div class="npc-body">セージグリーンの髪。ヴェルクハーフェン錬金術師ギルド所属。専門は抽出・蒸留・乳化・保存処理。研究バカ。アキラの美容・衛生商品を「新しい錬金術分野」と捉える。笑い方「ぐふふ…」。</div>
+      </div>
+      <div class="npc-card">
+        <div class="cimg" style="margin-bottom:10px;"><img src="セレナ.png" alt="セレナ設定画" class="img-clickable" onclick="openModal(this.src,this.alt)" style="width:100%;border-radius:6px;"></div>
+        <div class="npc-name">セレナ</div>
+        <div class="npc-sub">ヒューム / 27才 / 商人</div>
+        <div class="npc-body">素性を隠し各地で武者修行中。アキラの商品で世界をとれると確信しており、ある大商会を超えるという野望を胸に秘めている。</div>
+      </div>
+      <div class="npc-card">
+        <div class="cimg" style="margin-bottom:10px;"><img src="リゼット.png" alt="リゼット設定画" class="img-clickable" onclick="openModal(this.src,this.alt)" style="width:100%;border-radius:6px;"></div>
+        <div class="npc-name">リゼット＝ヴァルシュ</div>
+        <div class="npc-sub">ヒューム / 24才 / 商会令嬢</div>
+        <div class="npc-body">距離が近くアキラへ積極的に接近するタイプ。商業上層との接続役。エマの感情を揺らす存在。</div>
       </div>
     </div>
   </div>
@@ -1023,7 +1032,8 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
     <div class="gbtn" id="gn-al_g" onclick="sg('al_g',this)">アル</div>
     <div class="gbtn" id="gn-luke_g" onclick="sg('luke_g',this)">ルーク</div>
     <div class="gbtn" id="gn-guiding_g" onclick="sg('guiding_g',this)">導きの輪環</div>
-    <div class="gbtn" id="gn-dogran_g" onclick="sg('dogran_g',this)">⚠ 設定画（未登場・ネタバレ）</div>
+    <div class="gbtn" id="gn-illust_g" onclick="sg('illust_g',this)">本編挿絵</div>
+    <div class="gbtn" id="gn-dogran_g" onclick="sg('dogran_g',this)">サブキャラクター</div>
   </div>
 
   <div class="gp-pnl show" id="gp-logo"><div class="gal-img"><img src="title_logo.png" alt="タイトルロゴ" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap">タイトルロゴ「幻想科学のプロローグ」— 星・月・歯車・回路が融合したデザイン</div><div class="img-hint">🔍 画像をクリックすると拡大表示できます</div></div>
@@ -1047,21 +1057,21 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
     </div>
   </div>
 
+  <div class="gp-pnl" id="gp-illust_g">
+    <div class="img-hint" style="text-align:left;margin-bottom:14px;">🔍 各画像をクリックすると拡大表示できます（アルファポリス版本編挿絵）</div>
+    <div class="grid2" style="gap:18px;">
+      <div><div class="gal-img"><img src="背景_レグリス.png" alt="レグリス挿絵" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">第3話 挿絵 — 樹上都市レグリス</div></div>
+      <div><div class="gal-img"><img src="背景_クジラ.png" alt="クジラ挿絵" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">第51話 挿絵 — 夜空を渡る光の鯨</div></div>
+    </div>
+  </div>
+
   <div class="gp-pnl" id="gp-dogran_g">
-    <div class="spoiler-block sp-lv1" style="margin-bottom:18px;">
-      <div class="spoiler-toggle" onclick="toggleSpoiler(this.parentElement)">
-        <span><span class="spoiler-toggle-icon">⚠</span>　ネタバレあり ― 今後登場予定キャラクターの設定画</span>
-        <span class="spoiler-arrow">▼</span>
-      </div>
-      <div class="spoiler-content">
-        <div class="img-hint" style="text-align:left;margin-bottom:14px;">🔍 各画像をクリックすると拡大表示できます</div>
-        <div class="grid2" style="gap:18px;">
-          <div><div class="gal-img"><img src="ドグラン.png" alt="ドグラン設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">ドグラン — 鍛冶師</div></div>
-          <div><div class="gal-img"><img src="リファニー.png" alt="リファニー設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">リファニー＝キーン — 錬金術師</div></div>
-          <div><div class="gal-img"><img src="セレナ.png" alt="セレナ設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">セレナ — 商人</div></div>
-          <div><div class="gal-img"><img src="リゼット.png" alt="リゼット設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">リゼット＝ヴァルシュ — 商会令嬢</div></div>
-        </div>
-      </div>
+    <div class="img-hint" style="text-align:left;margin-bottom:14px;">🔍 各画像をクリックすると拡大表示できます</div>
+    <div class="grid2" style="gap:18px;">
+      <div><div class="gal-img"><img src="ドグラン.png" alt="ドグラン設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">ドグラン — 鍛冶師</div></div>
+      <div><div class="gal-img"><img src="リファニー.png" alt="リファニー設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">リファニー＝キーン — 錬金術師</div></div>
+      <div><div class="gal-img"><img src="セレナ.png" alt="セレナ設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">セレナ — 商人</div></div>
+      <div><div class="gal-img"><img src="リゼット.png" alt="リゼット設定画" class="img-clickable" onclick="openModal(this.src,this.alt)"></div><div class="gal-cap" style="margin-top:8px;">リゼット＝ヴァルシュ — 商会令嬢</div></div>
     </div>
   </div>
 </div>
@@ -1118,7 +1128,8 @@ html,body{background:var(--bg0);color:var(--ts);font-family:'Noto Sans JP',sans-
 <div class="pg" id="pg-links">
   <div class="ptitle pt-teal">作品リンク</div>
 <div class="litem"><a href="https://ncode.syosetu.com/n9349dp/" target="_blank" style="text-decoration:none;color:inherit;display:flex;align-items:center;justify-content:space-between;width:100%;"><span class="ln">小説家になろう</span><span class="lnote">→ 読みに行く</span></a></div>
-  <div class="litem"><a href="https://kakuyomu.jp/works/2912051598200344740" target="_blank" style="text-decoration:none;color:inherit;display:flex;align-items:center;justify-content:space-between;width:100%;"><span class="ln">カクヨム</span><span class="lnote">→ 読みに行く</span></a></div></div>
+  <div class="litem"><a href="https://kakuyomu.jp/works/2912051598200344740" target="_blank" style="text-decoration:none;color:inherit;display:flex;align-items:center;justify-content:space-between;width:100%;"><span class="ln">カクヨム</span><span class="lnote">→ 読みに行く</span></a></div>
+  <div class="litem"><a href="https://www.alphapolis.co.jp/novel/958366493/613061815" target="_blank" style="text-decoration:none;color:inherit;display:flex;align-items:center;justify-content:space-between;width:100%;"><span class="ln">アルファポリス</span><span class="lnote">挿絵あり → 読みに行く</span></a></div></div>
 
 <!-- ========== 更新履歴 ========== -->
 <div class="pg" id="pg-updates">
